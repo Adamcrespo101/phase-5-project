@@ -2,10 +2,10 @@
     margin: 0px 10px;
     border-radius: 20px;
     padding: 20px;
-    -moz-transition: all .3s ease-in;
-    -o-transition: all .3s ease-in;
-    -webkit-transition: all .3s ease-in;
-    transition: all .3s ease-in;
+    -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
 }
 
 .nav_items:hover {
@@ -17,15 +17,16 @@
 }
 
 .login {
-    height: 20em;
-    width: 30em;
+    height: fit-content;
+    width: 20em;
     background-color: white;
     position: absolute;
-    right: 37%; 
+    right: 42%; 
     top: 20%;
     margin: 0 auto;
     border: solid 2px gray;
     border-radius: 10px;
+    
 }
 
 #login-title {
@@ -38,3 +39,46 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+.signup{
+    height: fit-content;
+    width: fit-content;
+    background-color: white;
+    position: absolute;
+    right: 37%; 
+    top: 20%;
+    margin: 0 auto;
+    border: solid 2px gray;
+    border-radius: 10px;
+}
+
+.signup-title {
+    text-align: center;
+}
+
+.bio-box {
+  width: 84%;
+  height: 150px;
+  padding: 12px 20px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+  margin: 0 2px 0 7px;
+}
+
+.weekdays{
+    height: 3em;
+    width: 8em;
+    margin-left: 200px;
+    background-color: white;
+    border: solid 2px gray;
+    border-radius: 100px;
+    float: left;
+    margin-bottom: 50px;
+}
+
+.css-1675apn-MuiTableCell-root .Cell-dayOfWeek {
+    color: rgb(111, 35, 149);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}

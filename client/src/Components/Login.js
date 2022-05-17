@@ -8,21 +8,25 @@ function Login(){
                 
                 <label className="login-inputs">
                 Email: 
-                <input className="login-inputs" type="text" placeholder="Enter a valid email address.."/>
+                <br></br>
+                <input className="login-inputs" type="text" placeholder="Enter a valid email address.." required/>
                 </label>
                 <br></br>
                 <label className="login-inputs">
-                Password: 
-                <input className="login-inputs" type="password" placeholder="Enter password..."/>
+                Password:
+                <br></br> 
+                <input className="login-inputs" type="password" placeholder="Enter password..." required/>
                 </label>
                 <br></br>
                 <label className="login-inputs"> User Type:
                 <select className="login-inputs">
-                    <option>Therapist</option>
+                    <option>Admin</option>
                     <option>Patient</option>
                 </select>
                 </label>
-                
+                <br></br>
+                <a className='login-inputs' href='/signup'>Need an account? Click here to register.</a>
+                <br></br>
                 <button type="submit" className="login-inputs">Log in</button>
             </form>
         </div>

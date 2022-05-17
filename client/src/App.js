@@ -4,7 +4,7 @@ import Header from './Components/Header'
 import Home from './Components/Home'
 import Login from './Components/Login'
 import Signup from './Components/Signup'
-import Appointments from './Components/Appointments'
+import Schedule from './Components/Schedule'
 import Services from './Components/Services'
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
       <Route index element={<Home />} path="/home"/>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="/book_appointment" element={<Appointments />} />
+      <Route path="/appointments" element={<Schedule />} />
       <Route path="services" element={<Services />} />
     </Routes>
   </BrowserRouter>

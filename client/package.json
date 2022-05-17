@@ -7,6 +7,10 @@
     "node": "16.x"
   },
   "dependencies": {
+    "@devexpress/dx-react-core": "^3.0.3",
+    "@devexpress/dx-react-scheduler": "^3.0.3",
+    "@devexpress/dx-react-scheduler-material-ui": "^3.0.3",
+    "@syncfusion/ej2-react-schedule": "^20.1.56",
     "@testing-library/jest-dom": "^5.13.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
