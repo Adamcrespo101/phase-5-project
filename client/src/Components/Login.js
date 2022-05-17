@@ -9,8 +9,6 @@ function Login({setIsAuthenticated, setCurrentUser}){
         password: ''
     })
 
-   
-
     const handleChange = (e) => {
         setFormData({
           ...formData,

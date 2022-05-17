@@ -12,7 +12,11 @@ Rails.application.routes.draw do
 
   get '/me', to: 'admins#show'
 
+  #patient routes 
 
+  get '/signup', to: "patients#create"
+
+  post '/patient/login', to: "patient_sessions#create"
 
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
