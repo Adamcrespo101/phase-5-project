@@ -34,34 +34,7 @@ ActiveRecord::Schema.define(version: 2022_05_17_204002) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
-
-  create_table "assignments", force: :cascade do |t|
-    t.string "name"
-    t.datetime "due_date"
-    t.string "description"
-    t.integer "current_course_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "current_courses", force: :cascade do |t|
-    t.string "course_name"
-    t.integer "student_id"
-    t.integer "teacher_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "grades", force: :cascade do |t|
-    t.integer "result"
-    t.string "course_name"
-    t.string "feedback"
-    t.integer "teacher_id"
-    t.integer "student_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
+ 
   create_table "patients", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -73,29 +46,6 @@ ActiveRecord::Schema.define(version: 2022_05_17_204002) do
     t.integer "date_of_birth"
   end
 
-  create_table "students", force: :cascade do |t|
-    t.string "name"
-    t.string "degree_type"
-    t.string "username"
-    t.string "password_digest"
-    t.string "date_of_birth"
-    t.string "expected_graduation"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "email"
-    t.integer "current_course_id"
-  end
-
-  create_table "teachers", force: :cascade do |t|
-    t.string "name"
-    t.string "username"
-    t.string "password_digest"
-    t.string "subject"
-    t.string "school"
-    t.string "thumbnail"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "email"
-  end
+  
 
 end
