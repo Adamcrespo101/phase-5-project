@@ -18,15 +18,13 @@
 
 .login {
     height: fit-content;
-    width: 20em;
+    width: 20%;
     background-color: white;
     position: absolute;
-    right: 42%; 
-    top: 20%;
-    margin: 0 auto;
+    margin: 10% 40% 0 40%;
     border: solid 2px gray;
     border-radius: 10px;
-    
+    padding: 5px;
 }
 
 #login-title {
@@ -34,7 +32,7 @@
 }
 
 .login-inputs {
-    margin: 10px;
+    margin: 0px 10px 0px 10px;
     color: rgb(111, 35, 149);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
@@ -81,4 +79,31 @@
 .css-1675apn-MuiTableCell-root .Cell-dayOfWeek {
     color: rgb(111, 35, 149);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.appointments {
+    width: 75%;
+    margin: 0 auto;
+    
+}
+
+
+.days {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.times {
+    padding-bottom: 100px;
+}
+
+.appointments_table {
+    background-color: white;
+    padding: 0 50px;
+    border: solid 2px gray;
+    border-radius: 10px;
+}
+
+.cells {
+    border: solid gray 2px;
 }

@@ -3,6 +3,7 @@ import Paper from '@mui/material/Paper';
 import { ViewState, EditingState, IntegratedEditing } from '@devexpress/dx-react-scheduler';
 import { Scheduler, Appointments, WeekView, AppointmentForm } from '@devexpress/dx-react-scheduler-material-ui';
 import { useState } from 'react'
+import moment from 'moment'
 
 function Schedule(){
 
@@ -21,10 +22,10 @@ const schedulerData = [
 ];
    function saveAppointment(data){
      setAppointmentForm({
-       title: data.added.title,
-       notes: data.added.notes,
-       startDate: data.added.startDate,
-       endDate: data.added.endDate,
+       title: data?.added?.title,
+       notes: data?.added?.notes,
+       startDate: data?.added?.startDate,
+       endDate: data?.added?.endDate,
        allDay: false
      })
    }
@@ -32,7 +33,7 @@ const schedulerData = [
     return(
         <div className="appointments">
         <h1 id="appointment title">Select an opening to book:</h1>
-        <h2>Week of </h2>
+        
         <Paper>
           <Scheduler data={schedulerData}>
             <ViewState currentDate={currentDate}/>
@@ -40,7 +41,7 @@ const schedulerData = [
               <IntegratedEditing />
               <WeekView excludedDays={[0,6]} startDayHour={8} endDayHour={18} intervalCount={1}/>
               <Appointments />
-              <AppointmentForm />
+              <AppointmentForm/> 
           </Scheduler>
         </Paper>
     </div>
