@@ -9,8 +9,8 @@ import Services from './Components/Services'
 
 function App() {
 //DONT FORGET TO UNCOMMENT LIVE CHAT FEATURE IN HTML FILE
-
-
+//npm i --save @devexpress/dx-react-core @devexpress/dx-react-scheduler --prefix client RUN THIS ON MY LAPTOP 
+//npm i --save @devexpress/dx-react-scheduler-material-ui --prefix client RUN THIS ON MY LAPTOP 
 
 
   return (
