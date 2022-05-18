@@ -1,11 +1,37 @@
+import { formatDate } from 'devextreme/localization';
 import { useState } from 'react'
+import Calendar from 'react-calendar'
+import 'react-calendar/dist/Calendar.css';
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 
 
 function BookAppointment(){
 
+    
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+  
+
     const [appointmentTime, setAppointmentTime]= useState(null)
     const [selectedDay, setSelectedDay]= useState(null)
     const [open, setOpen]= useState(false)
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+      };
+      
 
         const dates = [
             {day: "Monday", timeSlots: ["8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm"]},
@@ -37,12 +63,17 @@ function BookAppointment(){
     const selectedTime = dates.find((date) => date.time === appointmentTime)
 
   
-    console.log(`weekday: ${selectedDate.day}`, `time: ${appointmentTime}`)
+    console.log(`weekday: ${selectedDate?.day}`, `time: ${appointmentTime}`)
+
+    function logDates (value, event){
+       console.log(formatDate(value, 'dd MMM y'))
+        
+    }
     
     return(
         <div className="appointments">
         <h1>Select an appointment to book:</h1>
-        <table className="appointments_table">
+        {/*<table className="appointments_table">
                 {dates.map((date) => {
                     return(
                         <>
@@ -59,7 +90,27 @@ function BookAppointment(){
                         </>
                     )
                 })}
-        </table>
+        </table>*/}
+        <form className='book-appointments'>
+            <Calendar onClickDay={handleOpen} defaultActiveStartDate={new Date()} minDate={new Date()} maxDate={new Date(2023, 1, 1)}/>
+            <div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Text in a modal
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </Typography>
+        </Box>
+      </Modal>
+    </div>
+        </form>
         </div>
     )
 }
