@@ -19,10 +19,11 @@ function Header({isAuthenticated, setCurrentUser, setIsAuthenticated}){
     return(
         <div className="header">
             <div>
-                <a className="nav_items" href="/home">Home</a>
+                <a className="nav_items" href="/">Home</a>
                 <a className="nav_items" href="/services">Services</a>
-                <a className="nav_items" href="/appointments">Book an Appointment</a>
+                <a className="nav_items" href="/appointments">Schedule</a>
                 <a className="nav_items" href="/signup">Register</a>
+                <a className='nav_items' href="/book">Book an Appointment</a>
                 {!isAuthenticated ? <a className="nav_items" href="/login">Login</a>
                  :
                  <a className="nav_items" onClick={handleLogout}>Log out</a>}

@@ -1,9 +1,8 @@
 import * as React from 'react';
-import Paper from '@mui/material/Paper';
-import { ViewState, EditingState, IntegratedEditing } from '@devexpress/dx-react-scheduler';
-import { Scheduler, Appointments, WeekView, AppointmentForm } from '@devexpress/dx-react-scheduler-material-ui';
 import { useState } from 'react'
 import moment from 'moment'
+import { ScheduleComponent, Inject, Day, WorkWeek, Agenda, Month, ViewDirective, ViewsDirective } from '@syncfusion/ej2-react-schedule'
+import { Scheduler, Editing } from 'devextreme-react/scheduler';
 
 function Schedule(){
 
@@ -29,21 +28,44 @@ const schedulerData = [
        allDay: false
      })
    }
-   console.log(appointmentForm)
+
+   function onAppointmentFormOpening(e) {
+        e.popup.option('showTitle', true);
+        e.popup.option('title', e.appointmentData.text ? 
+            e.appointmentData.text : 
+            'Create a new appointment');
+ 
+        const form = e.form;
+        let mainGroupItems = form.itemOption('mainGroup').items;
+        if (!mainGroupItems.find(function(i) { return i.dataField === "location" })) {
+            mainGroupItems.push({
+                colSpan: 1, 
+                label: { text: "Location" },
+                editorType: "dxTextBox",
+                
+            });
+            form.itemOption('mainGroup', 'items', mainGroupItems);
+        }
+    }
+
     return(
         <div className="appointments">
-        <h1 id="appointment title">Select an opening to book:</h1>
-        
-        <Paper>
-          <Scheduler data={schedulerData}>
-            <ViewState currentDate={currentDate}/>
-              <EditingState onCommitChanges={saveAppointment}/>
-              <IntegratedEditing />
-              <WeekView excludedDays={[0,6]} startDayHour={8} endDayHour={18} intervalCount={1}/>
-              <Appointments />
-              <AppointmentForm/> 
-          </Scheduler>
-        </Paper>
+        <h1 id="appointment title">Upcoming Appointments:</h1>
+      {/*}
+        <Scheduler id="scheduler" defaultCurrentView="week" onAppointmentFormOpening={onAppointmentFormOpening}>
+        <View type="day" startDayHour={9} endDayHour={18} />
+            <View type="week" startDayHour={9} endDayHour={18}/>
+            <Editing allowDragging={false}/>
+    </Scheduler>*/}
+    <ScheduleComponent currentView='WorkWeek' startHour='8:00' endHour="18:00">
+      <Inject services={[WorkWeek, Month, Day, Agenda]}/>
+      <ViewsDirective>
+        <ViewDirective option="WorkWeek"></ViewDirective>
+        <ViewDirective option="Day"></ViewDirective>
+        <ViewDirective option="Agenda"></ViewDirective>
+        <ViewDirective option="Month" showWeekend={false}></ViewDirective>
+      </ViewsDirective>
+    </ScheduleComponent>
     </div>
              
     )

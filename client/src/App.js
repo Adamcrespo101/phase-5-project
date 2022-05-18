@@ -1,4 +1,5 @@
 import './App.css';
+import 'devextreme/dist/css/dx.light.css';
 import { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from './Components/Header'
@@ -7,6 +8,7 @@ import Login from './Components/Login'
 import Signup from './Components/Signup'
 import Schedule from './Components/Schedule'
 import Services from './Components/Services'
+import BookAppointment from './Components/BookAppointment';
 
 function App() {
 //DONT FORGET TO UNCOMMENT LIVE CHAT FEATURE IN HTML FILE
@@ -37,11 +39,12 @@ useEffect(() => {
     <BrowserRouter>
     <Header isAuthenticated={isAuthenticated} setCurrentUser={setCurrentUser} setIsAuthenticated={setIsAuthenticated}/>
     <Routes>
-      <Route index element={<Home />} path="/home"/>
+      <Route index element={<Home />} path="/"/>
       <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} setCurrentUser={setCurrentUser}/>} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/appointments" element={<Schedule />} />
-      <Route path="services" element={<Services />} />
+      <Route path="/services" element={<Services />} />
+      <Route path="/book" element={<BookAppointment/>} />
     </Routes>
   </BrowserRouter>
 
