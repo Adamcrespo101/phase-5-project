@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :casefiles
   resources :appointments
   resources :patients
   resources :admins

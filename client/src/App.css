@@ -156,3 +156,8 @@
     overflow-x: hidden;
     overflow-y: auto;
 }
+
+.casefiles {
+    margin: 0 auto;
+    width: 95%;
+}

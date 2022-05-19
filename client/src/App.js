@@ -10,7 +10,7 @@ import Schedule from './Components/Schedule'
 import Services from './Components/Services'
 import BookAppointment from './Components/BookAppointment';
 import Confirmation from './Components/Confirmation';
-
+import Casefiles from './Components/Casefiles';
 function App() {
 //DONT FORGET TO UNCOMMENT LIVE CHAT FEATURE IN HTML FILE
 //npm i --save @devexpress/dx-react-core @devexpress/dx-react-scheduler --prefix client RUN THIS ON MY LAPTOP 
@@ -19,6 +19,7 @@ const [isAuthenticated, setIsAuthenticated] = useState(false);
 const [currentUser, setCurrentUser] = useState(null);
 const [userType, setUserType]= useState('Patient')
 const [appointments, setAppointments]= useState([])
+const [admin, setAdmin]= useState({})
 
 useEffect(() => {
   fetch('/appointments')
@@ -81,6 +82,11 @@ useEffect(() => {
   });
 }, []);
 
+useEffect(() => {
+  fetch('/find/2')
+  .then(res => res.json())
+  .then(data => setAdmin(data))
+}, [])
 
   console.log(userType)
   
@@ -93,10 +99,10 @@ useEffect(() => {
       <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} setCurrentUser={setCurrentUser} userType={userType} setUserType={setUserType}/>} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/services" element={<Services />} />
-      <Route path="/appointments" element={<Schedule />} />
+      <Route path="/appointments" element={<Schedule admin={admin}/>} />
       <Route path="/book" element={<BookAppointment currentUser={currentUser} setAppointments={setAppointments} appointments={appointments}/>} />
       <Route path="/confirmation" element={<Confirmation/>} />
-      
+      <Route path="/casefiles" element={<Casefiles admin={admin}/>} />
     </Routes>
   </BrowserRouter>
 
