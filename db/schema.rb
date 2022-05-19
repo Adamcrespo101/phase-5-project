@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_17_204002) do
+ActiveRecord::Schema.define(version: 2022_05_19_144728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(version: 2022_05_17_204002) do
     t.integer "patient_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "type_service"
+    t.string "time"
   end
 
   create_table "assignments", force: :cascade do |t|
@@ -40,24 +42,6 @@ ActiveRecord::Schema.define(version: 2022_05_17_204002) do
     t.datetime "due_date"
     t.string "description"
     t.integer "current_course_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "current_courses", force: :cascade do |t|
-    t.string "course_name"
-    t.integer "student_id"
-    t.integer "teacher_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "grades", force: :cascade do |t|
-    t.integer "result"
-    t.string "course_name"
-    t.string "feedback"
-    t.integer "teacher_id"
-    t.integer "student_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -71,33 +55,6 @@ ActiveRecord::Schema.define(version: 2022_05_17_204002) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "date_of_birth"
-  end
-
-  create_table "students", force: :cascade do |t|
-    t.string "name"
-    t.string "degree_type"
-    t.string "username"
-    t.string "password_digest"
-    t.string "date_of_birth"
-    t.string "expected_graduation"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "email"
-    t.integer "current_course_id"
-    t.boolean "is_teacher"
-  end
-
-  create_table "teachers", force: :cascade do |t|
-    t.string "name"
-    t.string "username"
-    t.string "password_digest"
-    t.string "subject"
-    t.string "school"
-    t.string "thumbnail"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "email"
-    t.boolean "is_teacher"
   end
 
 end

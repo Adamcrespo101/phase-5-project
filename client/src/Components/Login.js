@@ -1,8 +1,52 @@
 import { useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function Login({setIsAuthenticated, setCurrentUser}){
+function Login({setIsAuthenticated, setCurrentUser, userType, setUserType}){
     let navigate = useNavigate()
+
+    // useEffect(() => {
+//   fetch('/me')
+//   .then((res) => {
+//     if (res.ok) {
+//       res.json()
+//       .then((user) => {
+//         setIsAuthenticated(false);
+//         setCurrentUser(user);
+        
+//       });
+//     }
+//   });
+// }, []);
+
+
+  function userLogin(){
+    if (userType === "Patient") {
+      fetch('/auth')
+      .then((res) => {
+        if (res.ok) {
+          res.json()
+          .then((user) => {
+            setIsAuthenticated(false);
+            setCurrentUser(user);
+            
+          });
+        }
+      });
+    } else {
+      fetch('/me')
+      .then((res) => {
+        if (res.ok) {
+          res.json()
+          .then((user) => {
+            setIsAuthenticated(false);
+            setCurrentUser(user);
+            
+          });
+        }
+      });
+    }
+  } 
+
     
     const [formData, setFormData] = useState({
         email: '',
@@ -18,7 +62,7 @@ function Login({setIsAuthenticated, setCurrentUser}){
 
       const handleSubmit = (event) => {
         event.preventDefault();
-        fetch("/login", {
+        fetch(userType === "Admin" ? `/login` : `/patient/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -29,7 +73,7 @@ function Login({setIsAuthenticated, setCurrentUser}){
             res.json().then((user) => {
                 setCurrentUser(user);
                 setIsAuthenticated(true)
-                navigate('/home')
+                navigate('/')
                 console.log(user)
             });
           } else {
@@ -40,6 +84,9 @@ function Login({setIsAuthenticated, setCurrentUser}){
         });
       };
     
+      function handleUser(e){
+        setUserType(e.target.value)
+      }
 
     return(
         <div className="login">
@@ -59,9 +106,9 @@ function Login({setIsAuthenticated, setCurrentUser}){
                 </label>
                 <br></br>
                 <label className="login-inputs"> User Type:
-                <select className="login-inputs">
-                    <option>Admin</option>
-                    <option>Patient</option>
+                <select className="login-inputs" onChange={handleUser}>
+                    <option value="Patient" >Patient</option>
+                    <option value="Admin" >Admin</option>
                 </select>
                 </label>
                 <br></br>

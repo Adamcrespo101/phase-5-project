@@ -7,18 +7,35 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { useNavigate } from 'react-router-dom';
+import { relativeTimeThreshold } from 'moment';
 
+function BookAppointment({currentUser, setAppointments, appointments}){
 
-function BookAppointment(){
-
+  let nav = useNavigate();
     
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-  
-
-    const [appointmentTime, setAppointmentTime]= useState(null)
-    const [selectedDay, setSelectedDay]= useState(null)
+    
+    
+    
+    const [appointmentTime, setAppointmentTime]= useState('')
+    const [selectedDay, setSelectedDay]= useState('')
     const [open, setOpen]= useState(false)
+    const [chooseDate, setChooseDate]= useState(false)
+    const handleClose = () => setOpen(false);
+    const handleOpen = () => {
+      setOpen(true)
+      setChooseDate(prev => !prev)
+    };
+    const [appointmentData, setAppointmentData]= useState({
+      admin_id: 2,
+      patient_id: currentUser?.id,
+      time: '',
+      startDate: selectedDay,
+      endDate: selectedDay,
+      type_service: '',
+      notes: '',
+      title: `Appointment for ${currentUser?.first_name} ${currentUser?.last_name}`
+    })
 
     const style = {
         position: 'absolute',
@@ -46,14 +63,19 @@ function BookAppointment(){
         const times = ["8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm"]
 
     function handleTime(e){
-        setAppointmentTime(e.target.id)
+        setSelectedDay(e.target.id)
+        setAppointmentTime(e.target.value)
         console.log(appointmentTime)
     }
-    
-    function handleDay(e){
-       setSelectedDay(e.target.id)
-       setOpen(prev => !prev)
+
+    function handleSlot(e){
+      console.log(e.target.name)
     }
+    
+    function handleDay(event, value){
+       setSelectedDay(formatDate(value, 'dd MMM y'))
+      
+    };
     const mappedDays = dates.map((date) => date.day)
     
     const mappedTimes = dates.map((date) => date.time)
@@ -62,38 +84,64 @@ function BookAppointment(){
     
     const selectedTime = dates.find((date) => date.time === appointmentTime)
 
-  
-    console.log(`weekday: ${selectedDate?.day}`, `time: ${appointmentTime}`)
+    const handleChange = (e) => {
+      setAppointmentData({...appointmentData, [e.target.name]: e.target.value});
+    };
 
     function logDates (value, event){
-       console.log(formatDate(value, 'dd MMM y'))
-        
+       setSelectedDay(formatDate(value, 'dd MMM y'))
+        setOpen(prev => !prev)
     }
-    
+    console.log(currentUser)
+    function handleSubmit(e){
+      const newAppointment = {
+        admin_id: 2,
+        patient_id: currentUser?.id,
+        startDate: selectedDay,
+        endDate: selectedDay,
+        title: `Appointment for ${currentUser?.first_name} ${currentUser?.last_name} on ${selectedDay} at ${appointmentData.time}`,
+        type_service: appointmentData.type_service,
+        notes: appointmentData.notes,
+        time: appointmentData.time
+      }
+      e.preventDefault();
+      fetch('/appointments', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(newAppointment)
+      })
+      .then(res => res.json())
+      .then(data => setAppointments([...appointments, data]))
+      console.log(newAppointment)
+      nav('/confirmation')
+    }
+
+
+    console.log(currentUser)
     return(
         <div className="appointments">
-        <h1>Select an appointment to book:</h1>
-        {/*<table className="appointments_table">
+       {/* <h1>Select an appointment to book:</h1>
+        <table className="appointments_table">
                 {dates.map((date) => {
                     return(
-                        <>
+                    
                         <tr>
                             <th className='days columns' id={date.day} onClick={handleDay}>{date.day}</th>
                         </tr>
-                        <tr>
-                            {open ? selectedDate?.timeSlots?.map((time) => {
-                                return (
-                                    <td className='cells times' id={time} onClick={handleTime}>{time}</td>
-                                )
-                            }) : null}
-                        </tr>
-                        </>
                     )
                 })}
-        </table>*/}
-        <form className='book-appointments'>
-            <Calendar onClickDay={handleOpen} defaultActiveStartDate={new Date()} minDate={new Date()} maxDate={new Date(2023, 1, 1)}/>
-            <div>
+
+                <tr>
+                  {times.map((time) => {
+
+                  })}
+                </tr>
+                </table>*/}
+          <label>Select a date:</label> 
+            <Calendar id={!chooseDate ? null : 'hidden'} onClickDay={logDates} defaultActiveStartDate={new Date()} minDate={new Date()} maxDate={new Date(2023, 1, 1)}/>
+            
       <Modal
         open={open}
         onClose={handleClose}
@@ -101,17 +149,40 @@ function BookAppointment(){
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
+        <form className='book-appointments' onSubmit={handleSubmit}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+          Appointment for: {selectedDay}
           </Typography>
+          <Typography>
+            Choose a time slot:
+          </Typography>
+          <select name="time" onChange={handleChange} value={appointmentData.time}>
+            {times.map((time) => {
+              return(
+                <option key={time} name={time}>{time}</option>
+              )
+            })}
+          </select>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+           Select a Service:
           </Typography>
+          <select onChange={handleChange} name="type_service" value={appointmentData.type_service}>
+            <option >Anxiety and Panic Reduction</option>
+            <option >Bereavement Counseling</option>
+            <option >Career and Vocational Counseling</option>
+            <option >Child and Adolescent Services</option>
+            <option >Depression Alleviation</option>
+            <option >Marital, Relationship and Family Problems</option>
+            <option >Pre- and Post-Surgical Counseling</option>
+            <option >Telephone and Video Sessions</option>
+          </select>
+          <Typography>Additional Notes:</Typography>
+          <textarea className='bio-box' name='notes' onChange={handleChange} value={appointmentData.notes} placeholder='Include any information you feel your therapist should know prior to the appointment.'></textarea>
+          <button type='submit'>Confirm</button>
+      </form>
         </Box>
       </Modal>
-    </div>
-        </form>
-        </div>
+      </div>
     )
 }
 

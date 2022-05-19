@@ -1,7 +1,7 @@
 class PatientSessionsController < ApplicationController
 
     def create 
-        patient = patient.find_by(email: params[:email])
+        patient = Patient.find_by(email: params[:email])
         if patient&.authenticate(params[:password])
             session[:patient_id] = patient.id
             render json: patient, status: :created

@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   get '/me', to: 'admins#show'
 
   #patient routes 
+  post '/patient/login', to: "patient_sessions#create"
+
+  get '/auth', to: "patients#show"
 
   get '/signup', to: "patients#create"
 

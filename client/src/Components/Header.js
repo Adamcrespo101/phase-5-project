@@ -24,7 +24,7 @@ function Header({isAuthenticated, setCurrentUser, setIsAuthenticated}){
                 <a className="nav_items" href="/appointments">Schedule</a>
                 <a className="nav_items" href="/signup">Register</a>
                 <a className='nav_items' href="/book">Book an Appointment</a>
-                {!isAuthenticated ? <a className="nav_items" href="/login">Login</a>
+                {isAuthenticated ? <a className="nav_items" href="/login">Login</a>
                  :
                  <a className="nav_items" onClick={handleLogout}>Log out</a>}
 
