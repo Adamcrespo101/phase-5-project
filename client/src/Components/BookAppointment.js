@@ -34,7 +34,8 @@ function BookAppointment({currentUser, setAppointments, appointments}){
       endDate: selectedDay,
       type_service: '',
       notes: '',
-      title: `Appointment for ${currentUser?.first_name} ${currentUser?.last_name}`
+      title: `Appointment for ${currentUser?.first_name} ${currentUser?.last_name}`,
+      location_type: ''
     })
 
     const style = {
@@ -102,7 +103,8 @@ function BookAppointment({currentUser, setAppointments, appointments}){
         title: `Appointment for ${currentUser?.first_name} ${currentUser?.last_name} on ${selectedDay} at ${appointmentData.time}`,
         type_service: appointmentData.type_service,
         notes: appointmentData.notes,
-        time: appointmentData.time
+        time: appointmentData.time,
+        location_type: appointmentData.location_type
       }
       e.preventDefault();
       fetch('/appointments', {
@@ -114,7 +116,6 @@ function BookAppointment({currentUser, setAppointments, appointments}){
       })
       .then(res => res.json())
       .then(data => setAppointments([...appointments, data]))
-      console.log(newAppointment)
       nav('/confirmation')
     }
 
@@ -162,6 +163,13 @@ function BookAppointment({currentUser, setAppointments, appointments}){
                 <option key={time} name={time}>{time}</option>
               )
             })}
+          </select>
+          <Typography>
+            Choose Remote or In-person services:
+          </Typography>
+          <select onChange={handleChange} name='location_type' value={appointmentData.location_type}>
+            <option>Remote</option>
+            <option>In-person</option>
           </select>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
            Select a Service:

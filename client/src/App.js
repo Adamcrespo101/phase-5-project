@@ -59,9 +59,9 @@ useEffect(() => {
     if (res.ok) {
       res.json()
       .then((user) => {
-        setIsAuthenticated(false);
+        setIsAuthenticated(true);
         setCurrentUser(user);
-        console.log("admin authenticated")
+        console.log(user)
       });
     }
   });
@@ -73,9 +73,9 @@ useEffect(() => {
     if (res.ok) {
       res.json()
       .then((user) => {
-        setIsAuthenticated(false);
+        setIsAuthenticated(true);
         setCurrentUser(user);
-        console.log("patient authenticated")
+        console.log(user)
       });
     }
   });
@@ -92,10 +92,11 @@ useEffect(() => {
       <Route index element={<Home currentUser={currentUser}/>} path="/"/>
       <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} setCurrentUser={setCurrentUser} userType={userType} setUserType={setUserType}/>} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="/appointments" element={<Schedule />} />
       <Route path="/services" element={<Services />} />
+      <Route path="/appointments" element={<Schedule />} />
       <Route path="/book" element={<BookAppointment currentUser={currentUser} setAppointments={setAppointments} appointments={appointments}/>} />
       <Route path="/confirmation" element={<Confirmation/>} />
+      
     </Routes>
   </BrowserRouter>
 

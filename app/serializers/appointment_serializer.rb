@@ -1,5 +1,6 @@
 class AppointmentSerializer < ActiveModel::Serializer
   attributes :id, :title, :notes, :startDate, :endDate, :admin_id, :patient_id
 
-  has_many :appointments
+  belongs_to :admin 
+  belongs_to :patient
 end

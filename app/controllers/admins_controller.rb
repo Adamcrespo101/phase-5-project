@@ -28,6 +28,15 @@ class AdminsController < ApplicationController
         end
     end
 
+    def find  
+        admin = Admin.find_by(id: params[:id])
+        if admin
+            render json: admin, status: :ok
+        else
+            render json: {error: "admin not found"}, status: 401
+        end
+    end
+
     def destroy
         admin = Admin.find_by(id: params[:id])
         if admin 

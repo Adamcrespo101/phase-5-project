@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 function Login({setIsAuthenticated, setCurrentUser, userType, setUserType}){
     let navigate = useNavigate()
-
+const [errors, setErrors]= useState('')
     // useEffect(() => {
 //   fetch('/me')
 //   .then((res) => {
@@ -78,7 +78,7 @@ function Login({setIsAuthenticated, setCurrentUser, userType, setUserType}){
             });
           } else {
             res.json().then((errors) => {
-              console.error(errors);
+              setErrors(errors);
             });
           }
         });
@@ -114,7 +114,8 @@ function Login({setIsAuthenticated, setCurrentUser, userType, setUserType}){
                 <br></br>
                 <a className='login-inputs' href='/signup'>Need an account? Click here to register.</a>
                 <br></br>
-                <button type="submit" className="login-inputs">Log in</button>
+                <button type="submit" className="login-inputs">Log in <p>{errors !== '' ? <p>{errors}</p> : null}</p></button>
+                
             </form>
         </div>
     )
