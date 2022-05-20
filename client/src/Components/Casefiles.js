@@ -4,6 +4,14 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ClearIcon from '@mui/icons-material/Clear';
+import EditIcon from '@mui/icons-material/Edit';
+import moment from 'moment'
+
 
 function Casefiles(){
 
@@ -14,6 +22,7 @@ function Casefiles(){
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [editState, setEditState]= useState(false)
     
 
     const style = {
@@ -77,8 +86,25 @@ function Casefiles(){
         setOpen(false)
     }  
     
+    function handleEditState(){
+        setEditState(prev => !prev)
+    }
 
-    console.log(progressData)
+    let date = moment().format("YYYY-MM-DD");
+   
+    const [editProgressData, setEditProgressData]= useState({
+        report_date: '',
+        progress: '',
+        patient_id: patientInfo[0]
+    })
+    
+    const handleEditProgress = (e) => {
+        setEditProgressData({...editProgressData, [e.target.name]: e.target.value});
+      };
+
+    function handleEditSubmit(e){
+        e.preventDefault()
+    }
 
     return(
         <div className="casefiles">
@@ -98,23 +124,54 @@ function Casefiles(){
                             <>
                             
                                 <h3>Casefile for {patient.first_name} {patient.last_name}</h3>                            
-                                <ul >Date of birth : {patient.date_of_birth}</ul>
-                                <ul>Email Address: {patient.email}</ul>
+                                <ul ><strong>Date of birth</strong> : {patient.date_of_birth}</ul>
+                                <ul><strong>Email Address</strong>: {patient.email}</ul>
                                 <div className='patient-bio'>
-                                <p>Bio: {patient.bio}</p>
+                                <p><strong>Patient Bio</strong>: {patient.bio}</p>
                                 </div>
                                     <br></br>          
                                 <details>                      
                                 <summary className='report-summary'><h3>Progress Reports</h3></summary>
                                 { patient.casefiles.length < 1 ?  <h3 style={{textAlign: "center"}}>No notes have been added yet</h3> : patient.casefiles.map((casefile) => {
                                         return (
-                                            
-                                            <label>
-                                                Update as of {casefile.report_date}:
-                                                <ul>{casefile.progress}</ul>
-                                            </label>
-                                            
-                                        
+                                            <>
+                                    {!editState ? 
+                                       <Accordion>   
+                                        <AccordionSummary expandIcon={<ExpandMoreIcon />}
+                                          aria-controls="panel1a-content"
+                                          id="panel1a-header"
+                                        >
+                                          <Typography>Update as of {casefile.report_date}</Typography>
+                                        </AccordionSummary>
+                                        <AccordionDetails>
+                                          <Typography>
+                                          {casefile.progress}
+                                          </Typography>
+                                          <EditIcon onClick={handleEditState}/>
+                                          <ClearIcon />
+                                        </AccordionDetails>
+                                      </Accordion> 
+                                      :
+                                      <Accordion>   
+                                        <AccordionSummary expandIcon={<ExpandMoreIcon />}
+                                          aria-controls="panel1a-content"
+                                          id="panel1a-header"
+                                        >
+                                          <Typography>Update as of {casefile.report_date}</Typography>
+                                        </AccordionSummary>
+                                        <AccordionDetails>
+                                            <form>
+                                          <Typography>
+                                              <label>Update notes:</label>
+                                          </Typography>
+                                            <textarea className='bio-box' name="progress" onChange={handleEditProgress} value={editProgressData.progress} placeholder={casefile.progress}></textarea>
+                                          <button className='edit-button' type="submit" onClick={handleEditState}>Save changes</button>
+                                          <ClearIcon />
+                                          </form>
+                                        </AccordionDetails>
+                                      </Accordion> }
+                                             
+                                        </>
                                         )
                                     })}  
                                     </details>

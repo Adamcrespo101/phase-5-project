@@ -193,12 +193,14 @@
     border: none;
     margin-left: 40%;
     border-radius: 10px;
+    padding: 10px;
 }
 
 .new-update:hover, .report-summary:hover {
     background: rgb(111, 35, 149);
     color: white;
-    padding: 5px;
+    transition: color 2s;
+    transition: background 0.5s;
 }
 
 .report-summary {
@@ -209,4 +211,31 @@
     display: block;
     width: fit-content;
     cursor: pointer;
+    padding: 5px;
+}
+
+.css-i4bv87-MuiSvgIcon-root {
+    float: right;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.css-i4bv87-MuiSvgIcon-root:hover, .edit-button:hover {
+    background: rgb(111, 35, 149);
+    color: white;
+    border-radius: 10px;
+    transition: color 2s;
+    transition: background 0.5s;
+}
+
+details {
+    transition: height 1s;;
+}
+
+.edit-button {
+    border: none;
+    border-radius: 10px;
+    color: rgb(111, 35, 149);
+    float: right;
+    padding: 9px;
 }
