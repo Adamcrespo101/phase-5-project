@@ -132,9 +132,10 @@ function Casefiles(){
           })
     }
 
-    function logClick(e){
-        setSelectedFile(e.target.id)
+    function returnEditState(){
+        setEditState(prev => !prev)
     }
+    
 
     const fileDisplay = casefiles.find((file) => file.id === selectedFile)
     console.log(selectedFile)
@@ -146,7 +147,7 @@ function Casefiles(){
           const deletedFiles = casefiles.filter(casefile => casefile.id !== selectedFile)
           setCasefiles(deletedFiles)
     }
-
+    
     return(
         <div className="casefiles">
             <h1>Patient Casefiles:</h1>
@@ -183,7 +184,7 @@ function Casefiles(){
                                           id={casefile.id}
                                           onClick={(e) => setSelectedFile(e.target.id)}
                                         >
-                                          <Typography  onClick={() => setSelectedFile(casefile.id)}>Update as of {casefile.report_date}</Typography>
+                                          <Typography  onClick={() => setSelectedFile(casefile.id)}>Update: {casefile.report_date}</Typography>
                                         </AccordionSummary>
                                         <AccordionDetails>
                                           <Typography>
@@ -200,7 +201,7 @@ function Casefiles(){
                                           id={casefile.id}
                                           onClick={(e) => setSelectedFile(e.target.id)}
                                         >
-                                          <Typography>Update as of {casefile.report_date}</Typography>
+                                          <Typography>Updates: {casefile.report_date}</Typography>
                                         </AccordionSummary>
                                             <form onSubmit={handleEditSubmit}>
                                         <AccordionDetails>
@@ -209,6 +210,7 @@ function Casefiles(){
                                           </Typography>
                                             <textarea className='bio-box' name="progress" onChange={handleEditProgress} value={editProgressData.progress} placeholder={casefile.progress}></textarea>
                                           <button className='edit-button' type="submit" >Save changes</button>
+                                        <button className='edit-button' onClick={returnEditState}>Return</button>
                                           <ClearIcon />
                                         </AccordionDetails>
                                           </form>
@@ -227,7 +229,7 @@ function Casefiles(){
                                             </Typography>
                                             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                                             <label>Date: </label>
-                                            <input className="login-inputs" type="text" name="report_date" onChange={handleProgress} placeholder='YYYY/MM/DD' value={progressData.report_date}/>
+                                            <input className="login-inputs" type="text" name="report_date" onChange={handleProgress} placeholder='YYYY-MM-DD' value={progressData.report_date}/>
                                             </Typography>
                                             <Typography>
                                                 <label>Notes:</label>
