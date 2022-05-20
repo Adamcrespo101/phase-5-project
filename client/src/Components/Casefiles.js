@@ -130,6 +130,15 @@ function Casefiles(){
 
     const fileDisplay = casefiles.find((file) => file.id === selectedFile)
     console.log(selectedFile)
+
+    function deleteFiles(){
+        fetch(`/casefiles/${selectedFile}`, {
+            method: "DELETE"
+          })
+          const deletedFiles = casefiles.filter(casefile => casefile.id !== selectedFile)
+          setCasefiles(deletedFiles)
+    }
+
     return(
         <div className="casefiles">
             <h1>Patient Casefiles:</h1>
@@ -173,7 +182,7 @@ function Casefiles(){
                                           {casefile.progress}
                                           </Typography>
                                           <EditIcon onClick={handleEditState}/>
-                                          <ClearIcon />
+                                          <ClearIcon onClick={deleteFiles}/>
                                         </AccordionDetails>
                                       </Accordion> 
                                       :
