@@ -84,6 +84,10 @@ function Casefiles(){
         .then(res => res.json())
         .then(data => setCasefiles([...casefiles, data]))
         setOpen(false)
+        setProgressData({
+            report_date: '',
+            progress: ''
+        })
     }  
     
     function handleEditState(e){
@@ -122,6 +126,10 @@ function Casefiles(){
           .then(data => setCasefiles(casefiles.map(casefile => {return casefile.id === data.id ? data : casefile}))
           )
           setEditState(prev => !prev)
+          setEditProgressData({
+              report_date: '',
+              progress: ''
+          })
     }
 
     function logClick(e){
