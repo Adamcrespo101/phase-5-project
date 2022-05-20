@@ -5,7 +5,7 @@ class CasefilesController < ApplicationController
     end
 
     def create 
-        casefile = Casefile.create!(progress: params[:progress], patient_id: params[:patient_id])
+        casefile = Casefile.create!(progress: params[:progress], patient_id: params[:patient_id], report_date: params[:report_date])
         render json: casefile, status: :ok
     end
 end

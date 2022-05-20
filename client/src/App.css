@@ -132,6 +132,10 @@
  visibility: hidden;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 .book-appointments {
     background: white;
     color:rgb(111, 35, 149);
@@ -160,5 +164,49 @@
 .casefiles {
     margin: 0 auto;
     width: 95%;
+    max-height: 95%;
+    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: auto;
 }
 
+.file-container {
+    background: white;
+    width: 50%;
+    padding: 10px;
+    border: solid 2px gray;
+    border-radius: 30px;
+    margin: 0 auto;
+}
+
+.patient-bio {
+    width: 85%;
+    overflow: scroll;
+    margin: 0 auto;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.new-update {
+    color:rgb(111, 35, 149);
+    background: white;
+    border: none;
+    margin-left: 40%;
+    border-radius: 10px;
+}
+
+.new-update:hover, .report-summary:hover {
+    background: rgb(111, 35, 149);
+    color: white;
+    padding: 5px;
+}
+
+.report-summary {
+    color:rgb(111, 35, 149);
+    background: white;
+    border: none;
+    border-radius: 10px;
+    display: block;
+    width: fit-content;
+    cursor: pointer;
+}
