@@ -23,7 +23,7 @@ function Casefiles(){
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const [editState, setEditState]= useState(false)
-    
+    const [selectedFile, setSelectedFile]= useState(null)
 
     const style = {
         position: 'absolute',
@@ -60,7 +60,7 @@ function Casefiles(){
       };
       const filterPatients = patients.filter((patient) => patient.full_name?.includes(patientDisplay))
       const patientInfo = filterPatients.map((patient) => patient.id)
-      console.log(patientInfo[0])
+      
       const [progressData, setProgressData]= useState({
         report_date: '',
         progress: '',
@@ -86,11 +86,12 @@ function Casefiles(){
         setOpen(false)
     }  
     
-    function handleEditState(){
+    function handleEditState(e){
         setEditState(prev => !prev)
+        setSelectedFile(e.target.id)
     }
 
-    let date = moment().format("YYYY-MM-DD");
+    
    
     const [editProgressData, setEditProgressData]= useState({
         report_date: '',
@@ -104,8 +105,31 @@ function Casefiles(){
 
     function handleEditSubmit(e){
         e.preventDefault()
+       let date = moment().format("YYYY-MM-DD");
+        const updatedFile = {
+            report_date: date,
+            progress: editProgressData.progress,
+            patient_id: patientInfo[0]
+        }
+        fetch(`/casefiles/${selectedFile}`, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedFile)
+          })
+          .then(res => res.json())
+          .then(data => setCasefiles(casefiles.map(casefile => {return casefile.id === data.id ? data : casefile}))
+          )
+          setEditState(prev => !prev)
     }
 
+    function logClick(e){
+        setSelectedFile(e.target.id)
+    }
+
+    const fileDisplay = casefiles.find((file) => file.id === selectedFile)
+    console.log(selectedFile)
     return(
         <div className="casefiles">
             <h1>Patient Casefiles:</h1>
@@ -136,12 +160,13 @@ function Casefiles(){
                                         return (
                                             <>
                                     {!editState ? 
-                                       <Accordion>   
+                                       <Accordion  onClick={() => setSelectedFile(casefile.id)}>   
                                         <AccordionSummary expandIcon={<ExpandMoreIcon />}
                                           aria-controls="panel1a-content"
-                                          id="panel1a-header"
+                                          id={casefile.id}
+                                          onClick={(e) => setSelectedFile(e.target.id)}
                                         >
-                                          <Typography>Update as of {casefile.report_date}</Typography>
+                                          <Typography  onClick={() => setSelectedFile(casefile.id)}>Update as of {casefile.report_date}</Typography>
                                         </AccordionSummary>
                                         <AccordionDetails>
                                           <Typography>
@@ -152,23 +177,24 @@ function Casefiles(){
                                         </AccordionDetails>
                                       </Accordion> 
                                       :
-                                      <Accordion>   
+                                      <Accordion id={casefile.id} onClick={() => setSelectedFile(casefile.id)}>   
                                         <AccordionSummary expandIcon={<ExpandMoreIcon />}
                                           aria-controls="panel1a-content"
-                                          id="panel1a-header"
+                                          id={casefile.id}
+                                          onClick={(e) => setSelectedFile(e.target.id)}
                                         >
                                           <Typography>Update as of {casefile.report_date}</Typography>
                                         </AccordionSummary>
+                                            <form onSubmit={handleEditSubmit}>
                                         <AccordionDetails>
-                                            <form>
                                           <Typography>
                                               <label>Update notes:</label>
                                           </Typography>
                                             <textarea className='bio-box' name="progress" onChange={handleEditProgress} value={editProgressData.progress} placeholder={casefile.progress}></textarea>
-                                          <button className='edit-button' type="submit" onClick={handleEditState}>Save changes</button>
+                                          <button className='edit-button' type="submit" >Save changes</button>
                                           <ClearIcon />
-                                          </form>
                                         </AccordionDetails>
+                                          </form>
                                       </Accordion> }
                                              
                                         </>

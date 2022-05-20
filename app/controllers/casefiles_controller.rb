@@ -9,9 +9,14 @@ class CasefilesController < ApplicationController
         render json: casefile, status: :ok
     end
 
+    def show 
+        casefile = Casefile.find_by(id: params[:id])
+        render json: casefile, status: :ok
+    end
+
     def update 
         casefile = Casefile.find_by(id: params[:id])
-        casefile.update!(progress: params[:progress], patient_id: params[:patient_id], report_date: params[:report_date])
+        casefile.update(progress: params[:progress], patient_id: params[:patient_id], report_date: params[:report_date])
         render json: casefile, status: :accepted
     end
 
