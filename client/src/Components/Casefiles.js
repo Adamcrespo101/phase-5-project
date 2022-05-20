@@ -51,9 +51,9 @@ function Casefiles(){
       };
       const filterPatients = patients.filter((patient) => patient.full_name?.includes(patientDisplay))
       const patientInfo = filterPatients.map((patient) => patient.id)
-  
+      console.log(patientInfo[0])
       const [progressData, setProgressData]= useState({
-        date: '',
+        report_date: '',
         progress: '',
         patient_id: patientInfo[0]
     })
@@ -61,7 +61,7 @@ function Casefiles(){
     function handleSubmit(e){
         e.preventDefault()
         const newReport = {
-            date: progressData.date,
+            report_date: progressData.report_date,
             progress: progressData.progress,
             patient_id: patientInfo[0]
         }
@@ -78,7 +78,7 @@ function Casefiles(){
     }  
     
 
-
+    console.log(progressData)
 
     return(
         <div className="casefiles">
@@ -127,7 +127,7 @@ function Casefiles(){
                                             </Typography>
                                             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                                             <label>Date: </label>
-                                            <input className="login-inputs" type="text" name="date" onChange={handleProgress} placeholder='YYYY/MM/DD' value={progressData.date}/>
+                                            <input className="login-inputs" type="text" name="report_date" onChange={handleProgress} placeholder='YYYY/MM/DD' value={progressData.report_date}/>
                                             </Typography>
                                             <Typography>
                                                 <label>Notes:</label>
