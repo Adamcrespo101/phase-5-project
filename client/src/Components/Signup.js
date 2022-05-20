@@ -19,7 +19,15 @@ function Signup(){
 
     function handleSubmit(e) {
         e.preventDefault();
-        const userCreds = { ...formData }; 
+        const userCreds = {
+        email: formData.email,
+        first_name: formData.first_name,
+        last_name: formData.last_name,
+        full_name: `${formData.first_name} ${formData.last_name}`,
+        password: formData.password,
+        date_of_birth: formData.date_of_birth,
+        bio: formData.bio
+        }; 
         fetch(`/patients`, {
           method: "POST",
           headers: {
