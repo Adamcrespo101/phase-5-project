@@ -2,35 +2,238 @@ import * as React from 'react';
 import { useState, useEffect } from 'react'
 import EditIcon from '@mui/icons-material/Edit';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
-import moment from 'moment'
-import { ScheduleComponent, Inject, Day, WorkWeek, Agenda, Month, ViewDirective, ViewsDirective, EventSettingsModel } from '@syncfusion/ej2-react-schedule'
-import { Scheduler, Editing } from 'devextreme-react/scheduler';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import { formatDate } from 'devextreme/localization';
 
-function Schedule({admin}){
- 
 
+function Schedule({admin, appointments, setAppointments, currentUser}){
  
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
   
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+
+    const [open, setOpen] = React.useState(false);
+    //const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const [selectAppointment, setSelectAppointment] = useState(null)
+    const [editState, setEditState]= useState(true)
+    const [editDate, setEditDate]= useState('')
+    const [apptEdit, setApptEdit]= useState({
+      admin_id: 2,
+      patient_id: currentUser?.id,
+      time: '',
+      startDate: '',
+      endDate: '',
+      type_service: '',
+      notes: '',
+      title: `Appointment for ${currentUser?.first_name} ${currentUser?.last_name}`,
+      location_type: ''
+  })
+
+  const times = ["8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm"]
+
+ 
+  function handleOpen(appointment){
+    setSelectAppointment(appointment.id)
+    setOpen(true)
+  }
+
+function changeEditState(){
+  setEditState(prev => !prev)
+}
+ 
+  console.log(selectAppointment)
+
+  function deleteAppointments(id){
+    fetch(`/appointments/${selectAppointment}`, {
+        method: "DELETE"
+      })
+      const deletedAppointments = appointments.filter(appointment => appointment.id !== selectAppointment)
+      setAppointments(deletedAppointments)
+      setOpen(false)
+}
+function handleEditSubmit(e){
+  e.preventDefault()
+  const updatedAppointment = {
+    admin_id: 2,
+    patient_id: currentUser?.id,
+    time: '',
+    startDate: editDate,
+    endDate: editDate,
+    type_service: '',
+    notes: '',
+    title: `Appointment for ${currentUser?.first_name} ${currentUser?.last_name}`,
+    location_type: ''
+  }
+  fetch(`/appointments/${selectAppointment}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedAppointment)
+    })
+    .then(res => res.json())
+    .then(data => setAppointments(appointments.map(appointment => {return appointment.id === data.id ? data : appointment}))
+    )
+    setEditState(prev => !prev)
+    setApptEdit({
+      admin_id: 2,
+      patient_id: '',
+      time: '',
+      startDate: '',
+      endDate: '',
+      type_service: '',
+      notes: '',
+      title: ``,
+      location_type: ''
+    })
+}
   // want to be able to sort all of the appointment by date and time***
-    
+  function handleDate(value, event){
+     setEditDate(formatDate(value, 'dd MMM y'))
+  }  
+console.log(editDate)
+
     return(
       <div className="appointments">
         <h1 id="appointment title">Upcoming Appointments:</h1>
+        <label>
+          Filter Appointments By Month:  
+          <select>
+            {months.map((month) => {
+              return(
+                <option>{month}</option>
+              )
+            })}
+          </select>
+        </label>
         <div className='appointment-container'>
           {admin?.appointments?.map((appointment) => {
             return (
-              <div className='appointment-cards'>
-                <h2>{appointment.title}</h2>
-                <h3>{appointment.notes}</h3>
-                <div className='icons'>
-                <EditIcon/>
-                <RemoveCircleOutlineIcon/>
-                </div>
-              </div>
-            )
-          })}
+              
+              <Accordion onClick={() => setSelectAppointment(appointment.id)}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography>{appointment.title}</Typography>
+              </AccordionSummary>
+                {editState ? 
+                <>
+                <AccordionDetails>
+                <Typography>
+                Location: {appointment.location_type}
+                </Typography>
+                <Typography>
+                Type of Service: {appointment.type_service}
+                </Typography>
+                <Typography>
+                Additional notes: {appointment.notes}
+                </Typography>
+                <RemoveCircleOutlineIcon onClick={handleOpen}/>
+                <EditIcon onClick={changeEditState}/>
+                </AccordionDetails>
+                </>
+                :
+                <>
+                <AccordionDetails>
+                  <form>
+                  <label>Select a new date: 
+                    <Calendar onClickDay={handleDate} defaultActiveStartDate={new Date()} minDate={new Date()} maxDate={new Date(2023, 1, 1)} />
+                  </label>
+                  <br></br>
+                  <label>Select a new time: 
+                    <select>
+                      {times.map((time) => {
+                        return (
+                          <option>{time}</option>
+                        )
+                      })}
+                    </select>
+                  </label>
+                  <br></br>
+                <label>
+                Location: <select name="location_type">
+                  <option>Remote</option>
+                  <option>In person</option>
+                </select>
+                </label>
+                <Typography className="login-inputs">
+                <br></br>
+                  <label>
+                Type of Service: 
+                <select name="type_service">
+                <option >Anxiety and Panic Reduction</option>
+            <option >Bereavement Counseling</option>
+            <option >Career and Vocational Counseling</option>
+            <option >Child and Adolescent Services</option>
+            <option >Depression Alleviation</option>
+            <option >Marital, Relationship and Family Problems</option>
+            <option >Pre- and Post-Surgical Counseling</option>
+            <option >Telephone and Video Sessions</option>
+                  </select>
+                  </label>
+                  <br></br>
+                </Typography>
+                <br></br>
+                <label>
+                Additional notes:
+                </label>
+                <Typography>
+                <textarea className='bio-box' placeholder={appointment.notes} name="notes" />
+                </Typography>
+                <Typography className='save'>Save</Typography>
+                <EditIcon onClick={changeEditState}/>
+                </form>
+              </AccordionDetails>
+              </>
+                }
+            
+            
+            </Accordion>       
+          )})}
         </div>
-      </div>
+        <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Are you sure you would like to delete this appointment?
+          </Typography>
+          <Typography className='delete-buttons' id="modal-modal-description" sx={{ mt: 2 }} onClick={deleteAppointments}>
+            Confirm
+          </Typography>
+          <Typography className='delete-buttons' id="modal-modal-description" sx={{ mt: 2 }} onClick={handleClose}>
+            Cancel
+          </Typography>
+        </Box>
+      </Modal>
+    </div>
+  
              
     )
 }

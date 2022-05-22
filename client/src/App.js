@@ -11,10 +11,10 @@ import Services from './Components/Services'
 import BookAppointment from './Components/BookAppointment';
 import Confirmation from './Components/Confirmation';
 import Casefiles from './Components/Casefiles';
+import MyAppointments from './Components/MyAppointments';
+
 function App() {
-//DONT FORGET TO UNCOMMENT LIVE CHAT FEATURE IN HTML FILE
-//npm i --save @devexpress/dx-react-core @devexpress/dx-react-scheduler --prefix client RUN THIS ON MY LAPTOP 
-//npm i --save @devexpress/dx-react-scheduler-material-ui --prefix client RUN THIS ON MY LAPTOP 
+
 const [isAuthenticated, setIsAuthenticated] = useState(false);
 const [currentUser, setCurrentUser] = useState(null);
 const [userType, setUserType]= useState('Patient')
@@ -25,35 +25,9 @@ useEffect(() => {
   fetch('/appointments')
   .then(res => res.json())
   .then(data => setAppointments(data))
-}, [])
+}, [currentUser])
 
-// function userLogin(){
-//   if (userType === "Patient") {
-//     fetch('/auth')
-//     .then((res) => {
-//       if (res.ok) {
-//         res.json()
-//         .then((user) => {
-//           setIsAuthenticated(false);
-//           setCurrentUser(user);
-          
-//         });
-//       }
-//     });
-//   } else {
-//     fetch('/me')
-//     .then((res) => {
-//       if (res.ok) {
-//         res.json()
-//         .then((user) => {
-//           setIsAuthenticated(false);
-//           setCurrentUser(user);
-          
-//         });
-//       }
-//     });
-//   }
-// } 
+
 useEffect(() => {
   fetch('/me')
   .then((res) => {
@@ -86,7 +60,7 @@ useEffect(() => {
   fetch('/find/2')
   .then(res => res.json())
   .then(data => setAdmin(data))
-}, [])
+}, [appointments])
 
   console.log(userType)
   
@@ -99,10 +73,11 @@ useEffect(() => {
       <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} setCurrentUser={setCurrentUser} userType={userType} setUserType={setUserType}/>} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/services" element={<Services />} />
-      <Route path="/appointments" element={<Schedule admin={admin}/>} />
+      <Route path="/appointments" element={<Schedule admin={admin} appointments={appointments} setAppointments={setAppointments} currentUser={currentUser}/>} />
       <Route path="/book" element={<BookAppointment currentUser={currentUser} setAppointments={setAppointments} appointments={appointments}/>} />
       <Route path="/confirmation" element={<Confirmation/>} />
       <Route path="/casefiles" element={<Casefiles admin={admin}/>} />
+      <Route path="/my_appointments" element={<MyAppointments currentUser={currentUser} appointments={appointments} setAppointments={setAppointments}/>} />
     </Routes>
   </BrowserRouter>
 

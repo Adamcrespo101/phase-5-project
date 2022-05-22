@@ -196,7 +196,7 @@
     padding: 10px;
 }
 
-.new-update:hover, .report-summary:hover {
+.new-update:hover, .report-summary:hover, .delete-buttons:hover, .save:hover {
     background: rgb(111, 35, 149);
     color: white;
     transition: color 2s;
@@ -212,6 +212,20 @@
     width: fit-content;
     cursor: pointer;
     padding: 5px;
+}
+
+.delete-buttons{
+    color:rgb(111, 35, 149);
+    background: white;
+    border: none;
+    border-radius: 10px;
+    display: block;
+    width: fit-content;
+    cursor: pointer;
+    padding: 5px;
+    margin: 0 auto;
+    display: inline-block;
+    
 }
 
 .css-i4bv87-MuiSvgIcon-root {
@@ -238,4 +252,34 @@ details {
     color: rgb(111, 35, 149);
     float: right;
     padding: 9px;
+}
+
+.my-appointments {
+    width: 90%;
+    margin: 0 auto;
+}
+
+
+.notes {
+    text-align: center;
+    max-width: 600px; 
+}
+
+.css-1azl6jz-MuiTableCell-root {
+ max-width: 550px;   
+}
+
+.notes-header{
+    text-align: center;
+}
+
+.save {
+    color:rgb(111, 35, 149);
+    background: white;
+    border: none;
+    margin-left: 40%;
+    border-radius: 10px;
+    padding: 10px;
+    float: right;
+    cursor: pointer;
 }

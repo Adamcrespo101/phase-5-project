@@ -120,7 +120,7 @@ function BookAppointment({currentUser, setAppointments, appointments}){
     }
 
 
-    console.log(currentUser)
+    console.log(appointmentData)
     return(
         <div className="appointments">
        {/* <h1>Select an appointment to book:</h1>
