@@ -11,8 +11,12 @@ class AppointmentsController < ApplicationController
 
     def destroy 
         appointment = Appointment.find_by(id: params[:id])
+        if appointment
         appointment.destroy 
         head :no_content
+       else
+           render json: {error: "appointment not found"}, status: 404
+       end
     end
 
     def show 

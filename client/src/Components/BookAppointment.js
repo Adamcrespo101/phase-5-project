@@ -115,7 +115,7 @@ function BookAppointment({currentUser, setAppointments, appointments}){
         body: JSON.stringify(newAppointment)
       })
       .then(res => res.json())
-      .then(data => setAppointments([...appointments, data]))
+      .then(data => setAppointments([...appointments]))
       nav('/confirmation')
     }
 

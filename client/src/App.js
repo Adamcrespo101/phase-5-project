@@ -28,7 +28,7 @@ useEffect(() => {
   fetch('/appointments')
   .then(res => res.json())
   .then(data => setAppointments(data))
-}, [currentUser])
+}, [currentUser, patients])
 
 
 useEffect(() => {

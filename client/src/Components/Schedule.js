@@ -83,7 +83,7 @@ function changeEditState(){
         method: "DELETE"
       })
       const deletedAppointments = appointments.filter(appointment => appointment.id !== selectAppointment)
-      setAppointments(deletedAppointments)
+      setAppointments([...deletedAppointments])
       setOpen(false)
 }
 

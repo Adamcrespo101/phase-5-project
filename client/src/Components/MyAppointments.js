@@ -34,17 +34,16 @@ function MyAppointments({currentUser, appointments, setAppointments}){
         p: 4,
       };
 
-      function deleteAppointments(id){
+      function deleteAppointments(){
         fetch(`/appointments/${apptSelect}`, {
             method: "DELETE"
           })
-          const deletedAppointments = appointments.filter(appointment => appointment.id !== apptSelect)
-          setAppointments(deletedAppointments)
-          setOpen(false)
-          nav('/my_appointments')
+            const deletedAppointments = appointments.filter((appointment) => appointment.id !== apptSelect)
+            setAppointments([...deletedAppointments])
+            setOpen(false)
     }
 
-    console.log(currentUser)
+    console.log(apptSelect)
     return(
         <div className="my-appointments">
             <h1>My Appointments:</h1>
