@@ -82,8 +82,8 @@ function changeEditState(){
     fetch(`/appointments/${selectAppointment.id}`, {
         method: "DELETE"
       })
-      const deletedAppointments = appointments.filter(appointment => appointment.id !== selectAppointment)
-      setAppointments([...deletedAppointments])
+      const deletedAppointments = appointments.filter(appointment => appointment.id !== selectAppointment.id)
+      setAppointments(deletedAppointments)
       setOpen(false)
 }
 
@@ -178,7 +178,8 @@ function handleEditSubmit(e){
     })
   }
   
-  console.log(selectPatient)
+  const adminAppointments = appointments.filter((appointment) => appointment.admin_id === admin?.id)
+  
   const patientName = patients.find((patient) => patient.id == selectPatient)
   console.log(patientName)
     return(
@@ -197,7 +198,7 @@ function handleEditSubmit(e){
         </label>
         <br></br>
         <div className='appointment-container'>
-          {admin?.appointments?.map((appointment) => {
+          {appointments.map((appointment) => {
             return (
               
               <Accordion key={appointment.id} onClick={() => setSelectAppointment(appointment)}>
