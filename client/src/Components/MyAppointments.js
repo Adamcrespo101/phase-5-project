@@ -38,12 +38,18 @@ function MyAppointments({currentUser, appointments, setAppointments}){
         fetch(`/appointments/${apptSelect}`, {
             method: "DELETE"
           })
-            const deletedAppointments = appointments.filter((appointment) => appointment.id !== apptSelect)
-            setAppointments([...deletedAppointments])
+          .then(res => res.json())
+          .then(data => {
+            const deletedAppointments = appointments.filter(appointment => apptSelect !== appointment.id)
+            setAppointments(deletedAppointments)
             setOpen(false)
+          })
     }
+    
+    const appointmentFilter = appointments.filter((appointment) => appointment.patient_id === currentUser?.id)
 
-    console.log(apptSelect)
+    console.log(appointmentFilter)
+
     return(
         <div className="my-appointments">
             <h1>My Appointments:</h1>
@@ -70,8 +76,8 @@ function MyAppointments({currentUser, appointments, setAppointments}){
           </TableRow>
         </TableHead>
         <TableBody>
-          {currentUser?.appointments?.map((appointment) => (
-            <TableRow
+          {appointmentFilter.map((appointment) => {
+     return ( <TableRow
               key={appointment.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               onMouseOver={() => setApptSelect(appointment.id)}
@@ -86,7 +92,7 @@ function MyAppointments({currentUser, appointments, setAppointments}){
               <TableCell align="right" className='notes'><DoDisturbIcon onClick={handleOpen}/></TableCell>
             </TableRow>
             
-          ))}
+          )})}
         </TableBody>
       </Table>
     </TableContainer>

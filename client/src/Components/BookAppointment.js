@@ -4,11 +4,9 @@ import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useNavigate } from 'react-router-dom';
-import { relativeTimeThreshold } from 'moment';
 
 function BookAppointment({currentUser, setAppointments, appointments}){
 
@@ -115,7 +113,7 @@ function BookAppointment({currentUser, setAppointments, appointments}){
         body: JSON.stringify(newAppointment)
       })
       .then(res => res.json())
-      .then(data => setAppointments([...appointments]))
+      setAppointments([...appointments, newAppointment])
       nav('/confirmation')
     }
 
@@ -123,23 +121,6 @@ function BookAppointment({currentUser, setAppointments, appointments}){
     console.log(appointmentData)
     return(
         <div className="appointments">
-       {/* <h1>Select an appointment to book:</h1>
-        <table className="appointments_table">
-                {dates.map((date) => {
-                    return(
-                    
-                        <tr>
-                            <th className='days columns' id={date.day} onClick={handleDay}>{date.day}</th>
-                        </tr>
-                    )
-                })}
-
-                <tr>
-                  {times.map((time) => {
-
-                  })}
-                </tr>
-                </table>*/}
           <label>Select a date:</label> 
             <Calendar id={!chooseDate ? null : 'hidden'} onClickDay={logDates} defaultActiveStartDate={new Date()} minDate={new Date()} maxDate={new Date(2023, 1, 1)}/>
             

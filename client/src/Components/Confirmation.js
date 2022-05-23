@@ -6,7 +6,7 @@ function Confirmation(){
 let nav = useNavigate()
     useEffect(() => {
         const timer = setTimeout(() => {
-            nav('/my_appointments')
+            nav('/')
             console.log("You will be redirected in 3 seconds")
         }, 3000);
         
@@ -17,7 +17,7 @@ let nav = useNavigate()
     return(
         <div className="confirmation">
             <h1>Thank you for booking an appointment with us, you will receive an email confirmation shortly!</h1>
-            <h2>You will be redirected shortly...</h2>
+            <h2>Your being redirected to homepage...</h2>
         </div>
     )
 }

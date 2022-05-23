@@ -76,7 +76,7 @@ useEffect(() => {
 fetch('/patients')
 .then(res => res.json())
 .then(data => setPatients(data))
-}, [casefiles])
+}, [])
 
 
   console.log(userType)

@@ -190,7 +190,7 @@ function handleEditSubmit(e){
             <option name="All">All</option>
             {months.map((month) => {
               return(
-                <option name={month}>{month}</option> 
+                <option key={month} name={month}>{month}</option> 
                 )
               })}
               </select>
@@ -200,7 +200,7 @@ function handleEditSubmit(e){
           {admin?.appointments?.map((appointment) => {
             return (
               
-              <Accordion onClick={() => setSelectAppointment(appointment)}>
+              <Accordion key={appointment.id} onClick={() => setSelectAppointment(appointment)}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
@@ -236,7 +236,7 @@ function handleEditSubmit(e){
                     <select name="time" onChange={handleChange} value={apptEdit.time}>
                       {times.map((time) => {
                         return (
-                          <option name={time}>{time}</option>
+                          <option key={time} name={time}>{time}</option>
                         )
                       })}
                     </select>
@@ -291,7 +291,7 @@ function handleEditSubmit(e){
                     <select onChange={(e) => setSelectPatient(e.target.value)}>
                       <option >Select a patient</option>
                       {patients.map((patient) => {
-                return (<option value={patient.id}>{patient.full_name}</option>
+                return (<option key={patient.id} value={patient.id}>{patient.full_name}</option>
                       )})}
                     </select>
                     <br></br>
