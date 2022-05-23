@@ -35,16 +35,8 @@ ActiveRecord::Schema.define(version: 2022_05_20_114032) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "type_service"
     t.string "time"
+    t.string "location"
     t.string "location_type"
-  end
-
-  create_table "assignments", force: :cascade do |t|
-    t.string "name"
-    t.datetime "due_date"
-    t.string "description"
-    t.integer "current_course_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "casefiles", force: :cascade do |t|

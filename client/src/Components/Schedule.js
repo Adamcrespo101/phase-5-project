@@ -15,7 +15,7 @@ import 'react-calendar/dist/Calendar.css';
 import { formatDate } from 'devextreme/localization';
 
 
-function Schedule({admin, appointments, setAppointments, currentUser}){
+function Schedule({admin, appointments, setAppointments, currentUser, patients}){
  
   const style = {
     position: 'absolute',
@@ -38,6 +38,8 @@ function Schedule({admin, appointments, setAppointments, currentUser}){
     const [selectAppointment, setSelectAppointment] = useState(null)
     const [editState, setEditState]= useState(true)
     const [editDate, setEditDate]= useState('')
+    const [filterMonth, setFilterMonth]= useState("All")
+    const [selectPatient, setSelectPatient]= useState('')
     const [apptEdit, setApptEdit]= useState({
       admin_id: '',
       patient_id: '',
@@ -48,6 +50,18 @@ function Schedule({admin, appointments, setAppointments, currentUser}){
       notes: '',
       title: ``,
       location_type: ''
+  })
+
+  const [adminAppt, setAdminAppt]= useState({
+    admin_id: '',
+    patient_id: '',
+    time: '',
+    startDate: '',
+    endDate: '',
+    type_service: '',
+    notes: '',
+    title: ``,
+    location_type: ''
   })
 
   const times = ["8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm"]
@@ -78,7 +92,7 @@ const findPatient = appointments.filter((appointment) => appointment.id === sele
 function handleEditSubmit(e){
   e.preventDefault()
   const updatedAppointment = {
-    admin_id: 2,
+    admin_id: 1,
     patient_id: selectAppointment.patient_id,
     time: apptEdit.time,
     startDate: editDate,
@@ -119,22 +133,69 @@ function handleEditSubmit(e){
   const handleChange = (e) => {
     setApptEdit({...apptEdit, [e.target.name]: e.target.value});
   };
+
+  const handleAdminAppt = (e) => {
+    setAdminAppt({...adminAppt, [e.target.name]: e.target.value})
+  }
   
+  const filterByMonth = admin?.appointments?.filter((appointment) => appointment.startDate.includes(filterMonth))
+
+  console.log(selectPatient)
+
+  const adminApptSubmit = (e) => {
+    e.preventDefault()
+    const newAppointment = {
+      admin_id: 1,
+      patient_id: selectPatient,
+      startDate: editDate,
+      endDate: editDate,
+      title: `Appointment for ${patientName?.full_name} on ${editDate} at ${adminAppt.time}`,
+      type_service: adminAppt.type_service,
+      notes: adminAppt.notes,
+      time: adminAppt.time,
+      location_type: adminAppt.location_type
+    }
+    fetch('/appointments', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newAppointment)
+    })
+    .then(res => res.json())
+    .then(data => setAppointments([...appointments, data]))
+    //nav('/confirmation')
+    setAdminAppt({
+      admin_id: '',
+      patient_id: '',
+      time: '',
+      startDate: '',
+      endDate: '',
+      type_service: '',
+      notes: '',
+      title: ``,
+      location_type: ''
+    })
+  }
   
-  console.log(findPatient)
+  console.log(selectPatient)
+  const patientName = patients.find((patient) => patient.id == selectPatient)
+  console.log(patientName)
     return(
       <div className="appointments">
         <h1 id="appointment title">Upcoming Appointments:</h1>
         <label>
           Filter Appointments By Month:  
-          <select>
+          <select onChange={(e) => setFilterMonth(e.target.name)}>
+            <option name="All">All</option>
             {months.map((month) => {
               return(
-                <option>{month}</option>
-              )
-            })}
-          </select>
+                <option name={month}>{month}</option> 
+                )
+              })}
+              </select>
         </label>
+        <br></br>
         <div className='appointment-container'>
           {admin?.appointments?.map((appointment) => {
             return (
@@ -221,6 +282,58 @@ function handleEditSubmit(e){
             
             </Accordion>       
           )})}
+        </div>
+        <div className='admin-appointment-form'>
+          <details>
+          <summary className='add'>Add an Appointment [+]</summary>
+          <form className='book-appointments' onSubmit={adminApptSubmit}>
+          <label>Select a patient:</label>
+                    <select onChange={(e) => setSelectPatient(e.target.value)}>
+                      <option >Select a patient</option>
+                      {patients.map((patient) => {
+                return (<option value={patient.id}>{patient.full_name}</option>
+                      )})}
+                    </select>
+                    <br></br>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+          Select date: 
+          <Calendar onClickDay={handleDate} defaultActiveStartDate={new Date()} minDate={new Date()} maxDate={new Date(2023, 1, 1)} />
+          </Typography>
+          <Typography>
+            Choose a time slot:
+          </Typography>
+          <select name="time" onChange={handleAdminAppt} value={adminAppt.time}>
+            {times.map((time) => {
+              return(
+                <option key={time} name={time}>{time}</option>
+              )
+            })}
+          </select>
+          <Typography>
+            Choose Remote or In-person services:
+          </Typography>
+          <select name='location_type' onChange={handleAdminAppt} value={adminAppt.location_type}>
+            <option>Remote</option>
+            <option>In-person</option>
+          </select>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+           Select a Service:
+          </Typography>
+          <select name="type_service" onChange={handleAdminAppt} value={adminAppt.type_service} >
+            <option >Anxiety and Panic Reduction</option>
+            <option >Bereavement Counseling</option>
+            <option >Career and Vocational Counseling</option>
+            <option >Child and Adolescent Services</option>
+            <option >Depression Alleviation</option>
+            <option >Marital, Relationship and Family Problems</option>
+            <option >Pre- and Post-Surgical Counseling</option>
+            <option >Telephone and Video Sessions</option>
+          </select>
+          <Typography>Additional Notes:</Typography>
+          <textarea className='bio-box' name='notes' onChange={handleAdminAppt} value={adminAppt.notes} placeholder='Include additional patient notes for the appointment...'></textarea>
+          <button type='submit'>Confirm</button>
+      </form>
+          </details>
         </div>
         <Modal
         open={open}

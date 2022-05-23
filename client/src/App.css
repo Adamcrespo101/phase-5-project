@@ -6,6 +6,7 @@
     -o-transition: all .2s ease-in;
     -webkit-transition: all .2s ease-in;
     transition: all .2s ease-in;
+    cursor: pointer;
 }
 
 .nav_items:hover {
@@ -62,7 +63,7 @@
   background-color: #f8f8f8;
   font-size: 16px;
   resize: none;
-  margin: 0 2px 0 25px;
+  margin: 0 2px 0 2px;
 }
 
 .weekdays{
@@ -196,7 +197,7 @@
     padding: 10px;
 }
 
-.new-update:hover, .report-summary:hover, .delete-buttons:hover, .save:hover {
+.new-update:hover, .report-summary:hover, .delete-buttons:hover, .save:hover, .add:hover {
     background: rgb(111, 35, 149);
     color: white;
     transition: color 2s;
@@ -282,4 +283,15 @@ details {
     padding: 10px;
     float: right;
     cursor: pointer;
+}
+
+.add {
+    color:rgb(111, 35, 149);
+    background: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    width: fit-content;
+    margin: 0 auto;
 }

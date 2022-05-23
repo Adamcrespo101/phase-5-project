@@ -20,6 +20,9 @@ const [currentUser, setCurrentUser] = useState(null);
 const [userType, setUserType]= useState('Patient')
 const [appointments, setAppointments]= useState([])
 const [admin, setAdmin]= useState({})
+const [patients, setPatients]= useState([])
+const [casefiles, setCasefiles]= useState([])
+
 
 useEffect(() => {
   fetch('/appointments')
@@ -57,10 +60,24 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
-  fetch('/find/2')
+  fetch('/find/1')
   .then(res => res.json())
   .then(data => setAdmin(data))
 }, [appointments])
+
+useEffect(() => {
+  fetch('/casefiles')
+  .then(res => res.json())
+  .then(data => setCasefiles(data))
+},[])
+
+
+useEffect(() => {
+fetch('/patients')
+.then(res => res.json())
+.then(data => setPatients(data))
+}, [casefiles])
+
 
   console.log(userType)
   
@@ -73,7 +90,7 @@ useEffect(() => {
       <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} setCurrentUser={setCurrentUser} userType={userType} setUserType={setUserType}/>} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/services" element={<Services />} />
-      <Route path="/appointments" element={<Schedule admin={admin} appointments={appointments} setAppointments={setAppointments} currentUser={currentUser}/>} />
+      <Route path="/appointments" element={<Schedule patients={patients} admin={admin} appointments={appointments} setAppointments={setAppointments} currentUser={currentUser}/>} />
       <Route path="/book" element={<BookAppointment currentUser={currentUser} setAppointments={setAppointments} appointments={appointments}/>} />
       <Route path="/confirmation" element={<Confirmation/>} />
       <Route path="/casefiles" element={<Casefiles admin={admin}/>} />

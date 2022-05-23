@@ -27,7 +27,7 @@ function BookAppointment({currentUser, setAppointments, appointments}){
       setChooseDate(prev => !prev)
     };
     const [appointmentData, setAppointmentData]= useState({
-      admin_id: 2,
+      admin_id: 1,
       patient_id: currentUser?.id,
       time: '',
       startDate: selectedDay,
@@ -96,7 +96,7 @@ function BookAppointment({currentUser, setAppointments, appointments}){
     console.log(currentUser)
     function handleSubmit(e){
       const newAppointment = {
-        admin_id: 2,
+        admin_id: 1,
         patient_id: currentUser?.id,
         startDate: selectedDay,
         endDate: selectedDay,

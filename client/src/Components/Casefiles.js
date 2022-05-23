@@ -13,10 +13,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import moment from 'moment'
 
 
-function Casefiles(){
+function Casefiles({patients, setPatients, casefiles, setCasefiles}){
 
-    const [patients, setPatients]= useState([])
-    const [casefiles, setCasefiles]= useState([])
+   
     const [selectedPatient, setSelectedPatient] = useState(null)
     const [patientDisplay, setPatientDisplay] = useState("Select a patient")
     const [open, setOpen] = React.useState(false);
@@ -37,18 +36,6 @@ function Casefiles(){
         p: 4,
       };
 
-      useEffect(() => {
-          fetch('/casefiles')
-          .then(res => res.json())
-          .then(data => setCasefiles(data))
-      },[])
-
-
-    useEffect(() => {
-        fetch('/patients')
-        .then(res => res.json())
-        .then(data => setPatients(data))
-    }, [casefiles])
 
     
     const handleChange = (e) => {
