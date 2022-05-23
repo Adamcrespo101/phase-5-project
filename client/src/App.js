@@ -79,12 +79,12 @@ fetch('/patients')
 }, [])
 
 
-  console.log(userType)
+
   
   return (
     <div className="App">
     <BrowserRouter>
-    <Header isAuthenticated={isAuthenticated} setCurrentUser={setCurrentUser} setIsAuthenticated={setIsAuthenticated}/>
+    <Header isAuthenticated={isAuthenticated} setCurrentUser={setCurrentUser} setIsAuthenticated={setIsAuthenticated} userType={userType} currentUser={currentUser}/>
     <Routes>
       <Route index element={<Home currentUser={currentUser}/>} path="/"/>
       <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} setCurrentUser={setCurrentUser} userType={userType} setUserType={setUserType}/>} />

@@ -135,7 +135,7 @@ function Casefiles({patients, setPatients, casefiles, setCasefiles}){
           setCasefiles(deletedFiles)
     }
 
-    const findCasefiles = casefiles.filter((casefile) => casefile.patient_id === filterPatients[0].id)
+    const findCasefiles = casefiles.filter((casefile) => casefile?.patient_id === filterPatients[0]?.id)
     console.log(findCasefiles)
     return(
         <div className="casefiles">
