@@ -45,8 +45,8 @@ function Casefiles({patients, setPatients, casefiles, setCasefiles}){
       const handleProgress = (e) => {
         setProgressData({...progressData, [e.target.name]: e.target.value});
       };
-      const filterPatients = patients.filter((patient) => patient.full_name?.includes(patientDisplay))
-      const patientInfo = filterPatients.map((patient) => patient.id)
+      const filterPatients = patients?.filter((patient) => patient.full_name?.includes(patientDisplay))
+      const patientInfo = filterPatients?.map((patient) => patient.id)
       
       const [progressData, setProgressData]= useState({
         report_date: '',
@@ -124,7 +124,7 @@ function Casefiles({patients, setPatients, casefiles, setCasefiles}){
     }
     
 
-    const fileDisplay = casefiles.find((file) => file.id === selectedFile)
+    const fileDisplay = casefiles?.find((file) => file.id === selectedFile)
     console.log(selectedFile)
 
     function deleteFiles(){
@@ -134,7 +134,9 @@ function Casefiles({patients, setPatients, casefiles, setCasefiles}){
           const deletedFiles = casefiles.filter(casefile => casefile.id !== selectedFile)
           setCasefiles(deletedFiles)
     }
-    
+
+    const findCasefiles = casefiles.filter((casefile) => casefile.patient_id === filterPatients[0].id)
+    console.log(findCasefiles)
     return(
         <div className="casefiles">
             <h1>Patient Casefiles:</h1>
@@ -161,7 +163,15 @@ function Casefiles({patients, setPatients, casefiles, setCasefiles}){
                                     <br></br>          
                                 <details>                      
                                 <summary className='report-summary'><h3>Progress Reports</h3></summary>
-                                { patient.casefiles.length < 1 ?  <h3 style={{textAlign: "center"}}>No notes have been added yet</h3> : patient.casefiles.map((casefile) => {
+                                { patient.casefiles.length < 1 ?  
+                                
+                                
+                                <h3 style={{textAlign: "center"}}>No notes have been added yet</h3>
+                                
+                                
+                                : 
+                                
+                                        findCasefiles.map((casefile) => {
                                         return (
                                             <>
                                     {!editState ? 

@@ -22,8 +22,12 @@ class CasefilesController < ApplicationController
 
     def destroy 
         casefile = Casefile.find_by(id: params[:id])
+        if casefile 
         casefile.destroy 
-        head :no_content
+        render json: casefile, status: 202
+        else
+            render json: {error: "casefile not found"}, status: 404 
+        end
     end
 
 end

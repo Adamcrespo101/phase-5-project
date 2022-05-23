@@ -93,7 +93,7 @@ fetch('/patients')
       <Route path="/appointments" element={<Schedule patients={patients} admin={admin} appointments={appointments} setAppointments={setAppointments} currentUser={currentUser}/>} />
       <Route path="/book" element={<BookAppointment currentUser={currentUser} setAppointments={setAppointments} appointments={appointments}/>} />
       <Route path="/confirmation" element={<Confirmation/>} />
-      <Route path="/casefiles" element={<Casefiles admin={admin}/>} />
+      <Route path="/casefiles" element={<Casefiles admin={admin} patients={patients} setPatients={setPatients} casefiles={casefiles} setCasefiles={setCasefiles}/>} />
       <Route path="/my_appointments" element={<MyAppointments currentUser={currentUser} appointments={appointments} setAppointments={setAppointments}/>} />
     </Routes>
   </BrowserRouter>

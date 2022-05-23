@@ -6,7 +6,7 @@ function Confirmation(){
 let nav = useNavigate()
     useEffect(() => {
         const timer = setTimeout(() => {
-            nav('/')
+            nav('/my_appointments')
             console.log("You will be redirected in 3 seconds")
         }, 3000);
         
