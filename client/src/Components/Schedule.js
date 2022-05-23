@@ -15,7 +15,7 @@ import 'react-calendar/dist/Calendar.css';
 import { formatDate } from 'devextreme/localization';
 
 
-function Schedule({admin, appointments, setAppointments, currentUser, patients}){
+function Schedule({admin, appointments, setAppointments, currentUser, patients, changeEditState, setEditState, editState}){
  
   const style = {
     position: 'absolute',
@@ -36,7 +36,6 @@ function Schedule({admin, appointments, setAppointments, currentUser, patients})
     //const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const [selectAppointment, setSelectAppointment] = useState(null)
-    const [editState, setEditState]= useState(true)
     const [editDate, setEditDate]= useState('')
     const [filterMonth, setFilterMonth]= useState("All")
     const [selectPatient, setSelectPatient]= useState('')
@@ -72,10 +71,7 @@ function Schedule({admin, appointments, setAppointments, currentUser, patients})
     setOpen(true)
   }
 
-function changeEditState(){
-  setEditState(prev => !prev)
-}
- 
+
   console.log(selectAppointment)
 
   function deleteAppointments(id){
@@ -89,7 +85,7 @@ function changeEditState(){
 
 const findPatient = appointments.filter((appointment) => appointment.id === selectAppointment?.id)
 
-function handleEditSubmit(e){
+function handleEditSubmit(e, updated){
   e.preventDefault()
   const updatedAppointment = {
     admin_id: 1,
@@ -110,19 +106,23 @@ function handleEditSubmit(e){
       body: JSON.stringify(updatedAppointment)
     })
     .then(res => res.json())
-    .then(data => setAppointments(appointments.map(appointment => {return appointment.id === data.id ? data : appointment}))
-    )
-    setEditState(prev => !prev)
-    setApptEdit({
-      admin_id: '',
-      patient_id: '',
-      time: '',
-      startDate: '',
-      endDate: '',
-      type_service: '',
-      notes: '',
-      title: ``,
-      location_type: ''
+    .then(data => {
+      const updatedAppointments = appointments.map((appointment) => {
+        return appointment.id === selectAppointment.id ? data : appointment
+      })
+       setAppointments(updatedAppointments)
+      setEditState(prev => !prev)
+      setApptEdit({
+        admin_id: '',
+        patient_id: '',
+        time: '',
+        startDate: '',
+        endDate: '',
+        type_service: '',
+        notes: '',
+        title: ``,
+        location_type: ''
+      })
     })
 }
   // want to be able to sort all of the appointment by date and time***
@@ -199,8 +199,7 @@ function handleEditSubmit(e){
         <br></br>
         <div className='appointment-container'>
           {appointments.map((appointment) => {
-            return (
-              
+            return (       
               <Accordion key={appointment.id} onClick={() => setSelectAppointment(appointment)}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}

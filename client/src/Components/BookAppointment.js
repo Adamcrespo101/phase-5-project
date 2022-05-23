@@ -89,7 +89,7 @@ function BookAppointment({currentUser, setAppointments, appointments}){
 
     function logDates (value, event){
        setSelectedDay(formatDate(value, 'dd MMM y'))
-        setOpen(prev => !prev)
+        
     }
     console.log(currentUser)
     function handleSubmit(e){
@@ -120,18 +120,10 @@ function BookAppointment({currentUser, setAppointments, appointments}){
 
     console.log(appointmentData)
     return(
-        <div className="appointments">
-          <label>Select a date:</label> 
+        <div className="appointments book-appointments">
+          <label>Select a date to begin:</label> 
             <Calendar id={!chooseDate ? null : 'hidden'} onClickDay={logDates} defaultActiveStartDate={new Date()} minDate={new Date()} maxDate={new Date(2023, 1, 1)}/>
-            
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-        <form className='book-appointments' onSubmit={handleSubmit}>
+           <form onSubmit={handleSubmit}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
           Appointment for: {selectedDay}
           </Typography>
@@ -168,9 +160,7 @@ function BookAppointment({currentUser, setAppointments, appointments}){
           <Typography>Additional Notes:</Typography>
           <textarea className='bio-box' name='notes' onChange={handleChange} value={appointmentData.notes} placeholder='Include any information you feel your therapist should know prior to the appointment.'></textarea>
           <button type='submit'>Confirm</button>
-      </form>
-        </Box>
-      </Modal>
+      </form>     
       </div>
     )
 }
