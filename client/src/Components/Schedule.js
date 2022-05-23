@@ -39,14 +39,14 @@ function Schedule({admin, appointments, setAppointments, currentUser}){
     const [editState, setEditState]= useState(true)
     const [editDate, setEditDate]= useState('')
     const [apptEdit, setApptEdit]= useState({
-      admin_id: 2,
-      patient_id: currentUser?.id,
+      admin_id: '',
+      patient_id: '',
       time: '',
       startDate: '',
       endDate: '',
       type_service: '',
       notes: '',
-      title: `Appointment for ${currentUser?.first_name} ${currentUser?.last_name}`,
+      title: ``,
       location_type: ''
   })
 
@@ -65,27 +65,30 @@ function changeEditState(){
   console.log(selectAppointment)
 
   function deleteAppointments(id){
-    fetch(`/appointments/${selectAppointment}`, {
+    fetch(`/appointments/${selectAppointment.id}`, {
         method: "DELETE"
       })
       const deletedAppointments = appointments.filter(appointment => appointment.id !== selectAppointment)
       setAppointments(deletedAppointments)
       setOpen(false)
 }
+
+const findPatient = appointments.filter((appointment) => appointment.id === selectAppointment?.id)
+
 function handleEditSubmit(e){
   e.preventDefault()
   const updatedAppointment = {
     admin_id: 2,
-    patient_id: currentUser?.id,
-    time: '',
+    patient_id: selectAppointment.patient_id,
+    time: apptEdit.time,
     startDate: editDate,
     endDate: editDate,
-    type_service: '',
-    notes: '',
-    title: `Appointment for ${currentUser?.first_name} ${currentUser?.last_name}`,
-    location_type: ''
+    type_service: apptEdit.type_service,
+    notes: apptEdit.notes,
+    title: `Appointment for ${findPatient[0]?.patient?.first_name} ${findPatient[0]?.patient?.last_name} at ${selectAppointment?.time} on ${selectAppointment?.startDate}`,
+    location_type: apptEdit.location_type
   }
-  fetch(`/appointments/${selectAppointment}`, {
+  fetch(`/appointments/${selectAppointment.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -97,7 +100,7 @@ function handleEditSubmit(e){
     )
     setEditState(prev => !prev)
     setApptEdit({
-      admin_id: 2,
+      admin_id: '',
       patient_id: '',
       time: '',
       startDate: '',
@@ -112,8 +115,13 @@ function handleEditSubmit(e){
   function handleDate(value, event){
      setEditDate(formatDate(value, 'dd MMM y'))
   }  
-console.log(editDate)
 
+  const handleChange = (e) => {
+    setApptEdit({...apptEdit, [e.target.name]: e.target.value});
+  };
+  
+  
+  console.log(findPatient)
     return(
       <div className="appointments">
         <h1 id="appointment title">Upcoming Appointments:</h1>
@@ -131,7 +139,7 @@ console.log(editDate)
           {admin?.appointments?.map((appointment) => {
             return (
               
-              <Accordion onClick={() => setSelectAppointment(appointment.id)}>
+              <Accordion onClick={() => setSelectAppointment(appointment)}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
@@ -158,23 +166,23 @@ console.log(editDate)
                 :
                 <>
                 <AccordionDetails>
-                  <form>
+                  <form onSubmit={handleEditSubmit}>
                   <label>Select a new date: 
                     <Calendar onClickDay={handleDate} defaultActiveStartDate={new Date()} minDate={new Date()} maxDate={new Date(2023, 1, 1)} />
                   </label>
                   <br></br>
                   <label>Select a new time: 
-                    <select>
+                    <select name="time" onChange={handleChange} value={apptEdit.time}>
                       {times.map((time) => {
                         return (
-                          <option>{time}</option>
+                          <option name={time}>{time}</option>
                         )
                       })}
                     </select>
                   </label>
                   <br></br>
                 <label>
-                Location: <select name="location_type">
+                Location: <select name="location_type" onChange={handleChange} value={apptEdit.location_type}>
                   <option>Remote</option>
                   <option>In person</option>
                 </select>
@@ -183,7 +191,7 @@ console.log(editDate)
                 <br></br>
                   <label>
                 Type of Service: 
-                <select name="type_service">
+                <select name="type_service" onChange={handleChange} value={apptEdit.type_service}>
                 <option >Anxiety and Panic Reduction</option>
             <option >Bereavement Counseling</option>
             <option >Career and Vocational Counseling</option>
@@ -201,10 +209,10 @@ console.log(editDate)
                 Additional notes:
                 </label>
                 <Typography>
-                <textarea className='bio-box' placeholder={appointment.notes} name="notes" />
+                <textarea className='bio-box' placeholder={appointment.notes} name="notes" onChange={handleChange} value={apptEdit.notes}/>
                 </Typography>
-                <Typography className='save'>Save</Typography>
                 <EditIcon onClick={changeEditState}/>
+                <button type="submit" className='save'>Save</button>
                 </form>
               </AccordionDetails>
               </>
