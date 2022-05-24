@@ -1,5 +1,6 @@
 import { useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
+import logo from '../images/Healwell-logos.jpeg'
 
 function Login({setIsAuthenticated, setCurrentUser, userType, setUserType}){
     let navigate = useNavigate()
@@ -71,6 +72,7 @@ const [errors, setErrors]= useState('')
         }).then((res) => {
           if (res.ok) {
             res.json().then((user) => {
+              console.log(errors)
                 setCurrentUser(user);
                 setIsAuthenticated(true)
                 navigate('/')
@@ -93,6 +95,8 @@ const [errors, setErrors]= useState('')
       }
       console.log(errors)
     return(
+      <>
+          <img src={logo} alt="login-logo" className='login-logo'/>
         <div className="login">
             <form className="login_form" onSubmit={handleSubmit}>
                 <h3 id="login-title">Login:</h3>
@@ -122,6 +126,7 @@ const [errors, setErrors]= useState('')
                 <p className='errors'>{errors !== '' ? `${errors?.error?.login}` : null}</p>
             </form>
         </div>
+        </>
     )
 }
 

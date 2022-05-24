@@ -139,7 +139,7 @@ function Casefiles({patients, setPatients, casefiles, setCasefiles}){
     console.log(findCasefiles)
     return(
         <div className="casefiles">
-            <h1>Patient Casefiles:</h1>
+            <h1 >Patient Casefiles:</h1>
             <label>Select a patient casefile to display: </label>
             <select onChange={handleChange}>
                 <option>Select a patient</option>
