@@ -4,17 +4,17 @@ import home3 from '../images/home3.jpg'
 import home4 from '../images/home4.jpg'
 import home5 from '../images/home5.jpg'
 import home6 from '../images/home6.jpg'
-
+import logo from '../images/Healwell-logos.jpeg'
 
 function Home({currentUser}){
     return (
         <div className="home">
             
-                    <h1 className="home-title">{currentUser?.first_name === undefined ? "Welcome to our practice" : `Welcome, ${currentUser?.first_name}`}</h1>
+                    <img className="home-title" src={logo} alt="logo"/>
                 <div class="grid">
                     <div className="img-wrapper">
                     <img className="home-img blur zoom" src={home3} alt="home-image" />
-                    <div className="content fade slide-left"><h3>{currentUser?.first_name === undefined ? "Welcome to our practice." : `Welcome, ${currentUser?.first_name}`}</h3></div>
+                    <div className="content fade slide-left"><p>Therapy begins at the very first session with sensible goals that are mutually established as part of an alliance between you and your therapist.</p></div>
                     </div>
                     <div className="img-wrapper">
                     <img className="home-img blur zoom" src={home5} alt="home-image" />

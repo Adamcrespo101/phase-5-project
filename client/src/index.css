@@ -1,6 +1,6 @@
 body {
-  background-image: linear-gradient(to right, lightblue , violet);
-  color: rgb(111, 35, 149);
+  background: rgba(84, 154, 133, 0.97);
+  color: black;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
