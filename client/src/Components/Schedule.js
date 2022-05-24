@@ -116,7 +116,7 @@ function handleEditSubmit(e){
       setApptEdit({
         admin_id: '',
         patient_id: '',
-        time: '',
+        time: '8am',
         startDate: '',
         endDate: '',
         type_service: '',
@@ -256,7 +256,8 @@ function handleEditSubmit(e){
                   <label>
                 Type of Service: 
                 <select name="type_service" onChange={handleChange} value={apptEdit.type_service}>
-                <option >Anxiety and Panic Reduction</option>
+            <option>Select a service</option>
+            <option >Anxiety and Panic Reduction</option>
             <option >Bereavement Counseling</option>
             <option >Career and Vocational Counseling</option>
             <option >Child and Adolescent Services</option>

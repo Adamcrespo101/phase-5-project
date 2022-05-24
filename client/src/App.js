@@ -85,9 +85,9 @@ fetch('/patients')
 }, [])
 
 
-  
-  return (
-    <div className="App">
+console.log(isAuthenticated)
+return (
+  <div className="App">
     <BrowserRouter>
     <Header isAuthenticated={isAuthenticated} setCurrentUser={setCurrentUser} setIsAuthenticated={setIsAuthenticated} userType={userType} currentUser={currentUser}/>
     <Routes>

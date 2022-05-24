@@ -74,11 +74,15 @@ const [errors, setErrors]= useState('')
                 setCurrentUser(user);
                 setIsAuthenticated(true)
                 navigate('/')
-                console.log(user)
-            });
+              
+            })
           } else {
-            res.json().then((errors) => {
+            res.json().catch((errors) => {
+              console.log("errors here")
               setErrors(errors);
+              setCurrentUser(null);
+              setIsAuthenticated(false)
+              navigate('/login')
             });
           }
         });
@@ -87,7 +91,7 @@ const [errors, setErrors]= useState('')
       function handleUser(e){
         setUserType(e.target.value)
       }
-
+      console.log(errors)
     return(
         <div className="login">
             <form className="login_form" onSubmit={handleSubmit}>
@@ -114,8 +118,8 @@ const [errors, setErrors]= useState('')
                 <br></br>
                 <a className='login-inputs' href='/signup'>Need an account? Click here to register.</a>
                 <br></br>
-                <button type="submit" className="login-inputs">Log in <p>{errors !== '' ? <p>{errors}</p> : null}</p></button>
-                
+                <button type="submit" className="login-inputs">Log in </button>
+                <p className='errors'>{errors !== '' ? `${errors?.error?.login}` : null}</p>
             </form>
         </div>
     )

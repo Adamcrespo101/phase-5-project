@@ -10,7 +10,7 @@ let nav = useNavigate()
             console.log("You will be redirected in 3 seconds")
         }, 3000);
         
-    }, [])
+    }, [nav])
 
 
 
