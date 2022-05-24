@@ -72,7 +72,7 @@ function Schedule({admin, appointments, setAppointments, currentUser, patients, 
   }
 
 
-  console.log(selectAppointment)
+  
 
   function deleteAppointments(id){
     fetch(`/appointments/${selectAppointment.id}`, {
@@ -85,7 +85,7 @@ function Schedule({admin, appointments, setAppointments, currentUser, patients, 
 
 const findPatient = appointments.filter((appointment) => appointment.id === selectAppointment?.id)
 
-function handleEditSubmit(e, updated){
+function handleEditSubmit(e){
   e.preventDefault()
   const updatedAppointment = {
     admin_id: 1,
@@ -95,7 +95,7 @@ function handleEditSubmit(e, updated){
     endDate: editDate,
     type_service: apptEdit.type_service,
     notes: apptEdit.notes,
-    title: `Appointment for ${findPatient[0]?.patient?.first_name} ${findPatient[0]?.patient?.last_name} at ${selectAppointment?.time} on ${selectAppointment?.startDate}`,
+    title: `Appointment for ${findPatient[0]?.patient?.first_name} ${findPatient[0]?.patient?.last_name} at ${apptEdit?.time} on ${editDate}`,
     location_type: apptEdit.location_type
   }
   fetch(`/appointments/${selectAppointment.id}`, {
@@ -107,6 +107,7 @@ function handleEditSubmit(e, updated){
     })
     .then(res => res.json())
     .then(data => {
+      
       const updatedAppointments = appointments.map((appointment) => {
         return appointment.id === selectAppointment.id ? data : appointment
       })
@@ -140,7 +141,7 @@ function handleEditSubmit(e, updated){
   
   const filterByMonth = admin?.appointments?.filter((appointment) => appointment.startDate.includes(filterMonth))
 
-  console.log(selectPatient)
+ 
 
   const adminApptSubmit = (e) => {
     e.preventDefault()
@@ -181,7 +182,8 @@ function handleEditSubmit(e, updated){
   const adminAppointments = appointments.filter((appointment) => appointment.admin_id === admin?.id)
   
   const patientName = patients.find((patient) => patient.id == selectPatient)
-  console.log(patientName)
+
+  console.log(editDate)
     return(
       <div className="appointments">
         <h1 id="appointment title">Upcoming Appointments:</h1>
@@ -206,11 +208,12 @@ function handleEditSubmit(e, updated){
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
-                <Typography>{appointment.title}</Typography>
+               <Typography>Appointment for: {appointment.patient.full_name}</Typography>
               </AccordionSummary>
                 {editState ? 
                 <>
                 <AccordionDetails>
+                <Typography>Title: {appointment.title}</Typography>
                 <Typography>
                 Location: {appointment.location_type}
                 </Typography>

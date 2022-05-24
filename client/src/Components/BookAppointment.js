@@ -33,7 +33,7 @@ function BookAppointment({currentUser, setAppointments, appointments}){
       type_service: '',
       notes: '',
       title: `Appointment for ${currentUser?.first_name} ${currentUser?.last_name}`,
-      location_type: ''
+      location_type: 'Remote'
     })
 
     const style = {
