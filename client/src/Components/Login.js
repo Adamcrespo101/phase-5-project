@@ -72,14 +72,13 @@ const [errors, setErrors]= useState('')
         }).then((res) => {
           if (res.ok) {
             res.json().then((user) => {
-              console.log(errors)
+            
                 setCurrentUser(user);
                 setIsAuthenticated(true)
                 navigate('/')
-              
             })
           } else {
-            res.json().catch((errors) => {
+            res.json().then((errors) => {
               console.log("errors here")
               setErrors(errors);
               setCurrentUser(null);

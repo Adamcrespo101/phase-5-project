@@ -6,7 +6,12 @@ class AppointmentsController < ApplicationController
 
     def create 
         appointment = Appointment.create!(appointment_params)
-        render json: appointment, status: :created
+        if appointment.save
+            #NotifierMailer.appointment_booked.deliver_now
+             render json: appointment, status: :created
+        else
+            render json: {error: "invalid appointment"}, status: 422
+        end
     end
 
     def destroy 

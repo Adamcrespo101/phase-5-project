@@ -141,12 +141,14 @@
 
 .book-appointments {
     background: white;
-    width:fit-content;
     padding: 10px;
     border: solid gray 2px;
     border-radius: 10px;
     margin: 0 auto;
+    margin-top: 20px;
+    width: 50%;
 }
+
 
 .appointment-cards {
     background-color: white;
@@ -198,7 +200,7 @@
     padding: 10px;
 }
 
-.new-update:hover, .report-summary:hover, .delete-buttons:hover, .save:hover, .add:hover {
+.new-update:hover, .report-summary:hover, .delete-buttons:hover, .save:hover, .add:hover, .book-btn:hover {
     background: rgba(84, 154, 133, 0.97);
     color: white;
     transition: color 2s;
@@ -312,7 +314,7 @@ details {
 
 
 .grid {
-    display: grid;
+    display: block;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
@@ -423,29 +425,32 @@ details {
 }
 
 .services-1 {
-    height: 200px;
-    width: 300px;
+    height: 300px;
+    width: 400px;
     position: absolute;
     left: 10%;
     top: 35%;
     border-radius: 10px;
     box-shadow: 10px 5px 10px;
     transition: 200ms ease-in-out;
+    
 }
 
 
 .anxiety-info {
-    height: fit-content;
+    height: 36%;
     width: 30rem;
     position: absolute;
     left: 40%;
-    top: 40%;
+    top: 35%;
     background: white;
     padding: 5px;
     border-radius: 10px;
     border: solid 2px gray;
     box-shadow: 10px 5px 15px;
     transition: 200ms ease-in-out;
+    padding: 20px;
+    display: grid;
 }
 
 
@@ -455,18 +460,18 @@ details {
 }
 
 .services-2 {
-    height: 200px;
-    width: 300px;
+    height: 300px;
+    width: 400px;
     position: absolute;
     left: 10%;
-    top: 75%;
+    top: 80.5%;
     border-radius: 10px;
     box-shadow: 10px 5px 10px;
     transition: 200ms ease-in-out;
 }
 
 .depression-info {
-    height: fit-content;
+    height: 36%;
     width: 30rem;
     position: absolute;
     left: 40%;
@@ -477,15 +482,17 @@ details {
     border: solid 2px gray;
     box-shadow: 10px 5px 15px;
     transition: 200ms ease-in-out;
+    padding: 20px;
+    display: grid;
 }
 
 
 .services-3 {
-    height: 200px;
-    width: 300px;
+    height: 300px;
+    width: 400px;
     position: absolute;
     left: 10%;
-    bottom: -50%;
+    bottom: -68%;
     border-radius: 10px;
     box-shadow: 10px 5px 10px;
     transition: 200ms ease-in-out;
@@ -494,42 +501,46 @@ details {
 
 
 .services-4 {
-    height: 200px;
-    width: 300px;
+    height: 300px;
+    width: 400px;
     position: absolute;
     left: 10%;
-    bottom: -90%;
+    bottom: -113%;
     border-radius: 10px;
     box-shadow: 10px 5px 10px;
     transition: 200ms ease-in-out;
 }
 
 .child-care-info {
-    height: fit-content;
+    height: 36%;
     width: 30rem;
     position: absolute;
     left: 40%;
-    bottom: -50%;
+    bottom: -68%;
     background: white;
     padding: 5px;
     border-radius: 10px;
     border: solid 2px gray;
     box-shadow: 10px 5px 15px;
     transition: 200ms ease-in-out;
+    padding: 20px;
+    display: grid;
 }
 
 .surgical-info {
-    height: fit-content;
+    height: 36%;
     width: 30rem;
     position: absolute;
     left: 40%;
-    bottom: -90%;
+    bottom: -113%;
     background: white;
     padding: 5px;
     border-radius: 10px;
     border: solid 2px gray;
     box-shadow: 10px 5px 15px;
     transition: 200ms ease-in-out;
+    padding: 20px;
+    display: grid;
 }
 
 .login-logo{
@@ -540,4 +551,18 @@ details {
     right: -37%;
     top: 10%;
     z-index: -1;
+}
+
+.book-btn {
+    color:rgba(84, 154, 133, 0.97);
+    background: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    float: right;
+    cursor: pointer;
+}
+
+.hide-chat {
+    visibility: hidden;
 }

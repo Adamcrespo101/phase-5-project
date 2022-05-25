@@ -5,8 +5,14 @@ import home4 from '../images/home4.jpg'
 import home5 from '../images/home5.jpg'
 import home6 from '../images/home6.jpg'
 import logo from '../images/Healwell-logos.jpeg'
+import { useEffect } from 'react'
 
 function Home({currentUser}){
+
+  
+
+
+
     return (
         <div className="home">
             
@@ -22,11 +28,11 @@ function Home({currentUser}){
                     </div>
                     <div className="img-wrapper">
                     <img className="home-img blur zoom" src={home2} alt="home-image" />
-                    <div className="content fade slide-down"><p>Our mission is to provide the highest level of expert care to our clients in a comfortable setting.</p></div>
+                    <div className="content fade slide-right"><p>Our mission is to provide the highest level of expert care to our clients in a comfortable setting.</p></div>
                     </div>
                     <div className="img-wrapper">
                     <img className="home-img blur zoom" src={home1} alt="home-image" />
-                    <div className="content fade slide-right"><p>Our goal is to provide clients with tools you can use on your own to cope with intense emotional experiences, stressful situations, and tough interpersonal problems in the future.</p></div>
+                    <div className="content fade slide-left"><p>Our goal is to provide clients with tools you can use on your own to cope with intense emotional experiences, stressful situations, and tough interpersonal problems in the future.</p></div>
                     </div>
                     <div className="img-wrapper">
                     <img className="home-img blur zoom" src={home4} alt="home-image" />

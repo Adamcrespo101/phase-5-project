@@ -1,19 +1,16 @@
 import { formatDate } from 'devextreme/localization';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
 import { useNavigate } from 'react-router-dom';
 
-function BookAppointment({currentUser, setAppointments, appointments}){
+function BookAppointment({currentUser, setAppointments, appointments, isAuthenticated}){
 
   let nav = useNavigate();
     
-    
-    
+  
     
     const [appointmentTime, setAppointmentTime]= useState('')
     const [selectedDay, setSelectedDay]= useState('')
@@ -159,7 +156,7 @@ function BookAppointment({currentUser, setAppointments, appointments}){
           </select>
           <Typography>Additional Notes:</Typography>
           <textarea className='bio-box' name='notes' onChange={handleChange} value={appointmentData.notes} placeholder='Include any information you feel your therapist should know prior to the appointment.'></textarea>
-          <button type='submit'>Confirm</button>
+          <button type='submit' className='book-btn'>Confirm</button>
       </form>     
       </div>
     )
