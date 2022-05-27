@@ -6,12 +6,14 @@
   <body>
     <h1>Thank you for booking with Healwell, <%=@patient.full_name %></h1>
     <p>
-      You have successfully booked an appointment, log in and check your "My appointments page".
+      You have successfully booked an appointment for:
+      <%= @appointment.startDate %> at <%= @appointment.time%>,<br>
+      Changes can be made to you appointment by visiting "My Appointments" page.<br>
+      We look forward to seeing you!
       
     </p>
     <p>
-      To login to the site, just follow this link: 
+
     </p>
-    <p>Thanks for joining and have a great day!</p>
   </body>
 </html>

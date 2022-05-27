@@ -563,6 +563,6 @@ details {
     cursor: pointer;
 }
 
-.hide-chat {
+#hide-chat {
     visibility: hidden;
 }

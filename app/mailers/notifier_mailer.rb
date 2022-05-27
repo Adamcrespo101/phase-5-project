@@ -1,8 +1,9 @@
 class NotifierMailer < ApplicationMailer
     default from: 'Appointmentbot@healwelltherapy.com'
 
-def appointment_booked
-    @patient = Patient.second
+def appointment_booked(appointment)
+    @appointment = appointment
+    @patient = @appointment.patient
     mail(
         to: @patient.email,
         subject: "Your appointment is booked!"

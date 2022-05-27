@@ -85,8 +85,7 @@ fetch('/patients')
 }, [])
 
 
-
-console.log(isAuthenticated)
+console.log(document.querySelector('script'))
 return (
   <div className="App">
     <BrowserRouter>
