@@ -12,6 +12,7 @@ import BookAppointment from './Components/BookAppointment';
 import Confirmation from './Components/Confirmation';
 import Casefiles from './Components/Casefiles';
 import MyAppointments from './Components/MyAppointments';
+import Footer from './Components/Footer';
 
 function App() {
 
@@ -84,15 +85,7 @@ fetch('/patients')
 .then(data => setPatients(data))
 }, [])
 
-useEffect(() => {
-  let chat = document.querySelector('script')
-  
-  if (currentUser?.date_of_birth){
-  return  chat.src = "//code.tidio.co/ul1rfxlxteemfiiwmmg5tywhe0dfcivf.js"
-  } else {
-    chat.src = ''
-  }
-},[currentUser])
+
 
 
 return (
@@ -110,6 +103,7 @@ return (
       <Route path="/casefiles" element={<Casefiles admin={admin} patients={patients} setPatients={setPatients} casefiles={casefiles} setCasefiles={setCasefiles}/>} />
       <Route path="/my_appointments" element={<MyAppointments currentUser={currentUser} appointments={appointments} setAppointments={setAppointments}/>} />
     </Routes>
+    <Footer />
   </BrowserRouter>
 
     </div>

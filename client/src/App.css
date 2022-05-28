@@ -314,8 +314,9 @@ details {
 
 
 .grid {
-    display: block;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    border: solid 5px gray;
 }
 
 .img-wrapper{
@@ -399,8 +400,8 @@ details {
 }
 
 .home-img {
-    height: 321px;
-    width: 321px;
+    height: 300px;
+    width: 30%;
 }
 
 .content {
@@ -415,6 +416,9 @@ details {
     right: -41%;
     top: 10%;
     z-index: -1;
+    border-radius: 50px;
+    margin-top: 25px;
+    margin-bottom: 10px;
 }
 
 .services {
@@ -569,7 +573,75 @@ details {
 
 .transition {
     transition: all 0.33s ease;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
 }
 
+.footer{
+    height: 20px;
+    position: fixed;
+    bottom: 0%;
+    background: red;
+    width: 100%;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-left: -20px;
+    padding-bottom: 20px;
+}
+
+.chat-box{
+    height: 50%;
+    width: 200px;
+    position: fixed;
+    display: block;
+    background: white;
+    top: 43%;
+    right: 2%;
+}
+
+.chat-box-header{
+    height: 30px;
+    position: absolute;
+    background-color: lightsalmon;
+    width: 100%;
+    align-content: center;
+    border-bottom: solid 2px gray;
+    
+}
+
+.header-text{
+    margin-right: 10px;
+    display: contents;
+    cursor: pointer;
+    transition: 200ms ease-in-out;
+}
+
+.help {
+border: none;
+color: white;
+background: salmon;
+transition: 200ms ease-in-out;
+cursor: pointer;
+}
+
+.help:hover, .header-text:hover {
+    color: red;
+    background: white;
+   
+}
+
+.chat-inputs{
+    position: absolute;
+    top: 94%;
+}
+
+.chat-inputs > button {
+    position: absolute;
+    height: 100%;
+    width: 20%;
+    margin-left: -3px;
+    border: none;
+    background: rgb(230, 89, 73);
+    color: white;
+}

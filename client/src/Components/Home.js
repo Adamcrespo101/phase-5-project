@@ -43,6 +43,7 @@ function Home({currentUser}){
                     <img className="home-img blur zoom" src={home6} alt="home-image" />
                     <div className="content fade slide-right"><p>We make finding expert, compassionate therapy simple.</p></div>
                     </div>
+                    
                 </div>
                 
         </div>
