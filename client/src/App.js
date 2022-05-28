@@ -84,8 +84,17 @@ fetch('/patients')
 .then(data => setPatients(data))
 }, [])
 
+useEffect(() => {
+  let chat = document.querySelector('script')
+  
+  if (currentUser?.date_of_birth){
+  return  chat.src = "//code.tidio.co/ul1rfxlxteemfiiwmmg5tywhe0dfcivf.js"
+  } else {
+    chat.src = ''
+  }
+},[currentUser])
 
-console.log(document.querySelector('script'))
+
 return (
   <div className="App">
     <BrowserRouter>

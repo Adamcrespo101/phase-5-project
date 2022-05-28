@@ -5,6 +5,7 @@ def appointment_booked(appointment)
     @appointment = appointment
     @patient = @appointment.patient
     mail(
+        from: 'Appointmentbot@healwelltherapy.com',
         to: @patient.email,
         subject: "Your appointment is booked!"
     ) do |format|

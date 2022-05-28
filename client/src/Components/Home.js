@@ -7,6 +7,7 @@ import home6 from '../images/home6.jpg'
 import logo from '../images/Healwell-logos.jpeg'
 import { useEffect } from 'react'
 
+
 function Home({currentUser}){
 
   
@@ -43,6 +44,7 @@ function Home({currentUser}){
                     <div className="content fade slide-right"><p>We make finding expert, compassionate therapy simple.</p></div>
                     </div>
                 </div>
+                
         </div>
     )
 }

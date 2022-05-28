@@ -29,7 +29,7 @@ function Schedule({admin, appointments, setAppointments, currentUser, patients, 
     p: 4,
   };
   
-  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 
     const [open, setOpen] = React.useState(false);
@@ -155,7 +155,7 @@ function handleEditSubmit(e){
       notes: adminAppt.notes,
       time: adminAppt.time,
       location_type: adminAppt.location_type
-    }
+    } 
     fetch('/appointments', {
       method: "POST",
       headers: {
@@ -179,28 +179,33 @@ function handleEditSubmit(e){
     })
   }
   
+  function handleMonth(e){
+    setFilterMonth(e.target.value)
+  }
   const adminAppointments = appointments.filter((appointment) => appointment.admin_id === admin?.id)
   
   const patientName = patients.find((patient) => patient.id == selectPatient)
 
-  console.log(editDate)
+  const byMonth = appointments.filter((appointment) => appointment.startDate.includes(filterMonth))
+
+  console.log(byMonth)
     return(
       <div className="appointments">
         <h1 id="appointment title">Upcoming Appointments:</h1>
         <label>
           Filter Appointments By Month:  
-          <select onChange={(e) => setFilterMonth(e.target.name)}>
+          <select onChange={handleMonth}>
             <option name="All">All</option>
             {months.map((month) => {
               return(
-                <option key={month} name={month}>{month}</option> 
+                <option key={month}>{month}</option> 
                 )
               })}
               </select>
         </label>
         <br></br>
         <div className='appointment-container'>
-          {appointments.map((appointment) => {
+          {byMonth.map((appointment) => {
             return (       
               <Accordion key={appointment.id} onClick={() => setSelectAppointment(appointment)}>
               <AccordionSummary
@@ -208,7 +213,7 @@ function handleEditSubmit(e){
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
-               <Typography>Appointment for: {appointment.patient.full_name}</Typography>
+               <Typography>Appointment for: {appointment.patient.full_name} - {appointment.startDate}</Typography>
               </AccordionSummary>
                 {editState ? 
                 <>
