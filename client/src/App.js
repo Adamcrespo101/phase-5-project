@@ -103,7 +103,7 @@ return (
       <Route path="/casefiles" element={<Casefiles admin={admin} patients={patients} setPatients={setPatients} casefiles={casefiles} setCasefiles={setCasefiles}/>} />
       <Route path="/my_appointments" element={<MyAppointments currentUser={currentUser} appointments={appointments} setAppointments={setAppointments}/>} />
     </Routes>
-    <Footer />
+    {currentUser?.date_of_birth.length > 1 ? <Footer currentUser={currentUser}/> : null}
   </BrowserRouter>
 
     </div>

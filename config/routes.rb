@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :chatrooms
   resources :casefiles
   resources :appointments
   resources :patients

@@ -568,7 +568,7 @@ details {
 }
 
 #hide-chat {
-    visibility: hidden;
+    display: none;
 }
 
 .transition {
@@ -644,4 +644,16 @@ cursor: pointer;
     border: none;
     background: rgb(230, 89, 73);
     color: white;
+}
+
+.chat-body{
+    position: absolute;
+    top: 10%;
+    height: 84%;
+    width: 100%;
+}
+
+.chat-body > ul {
+    color: black;
+
 }
