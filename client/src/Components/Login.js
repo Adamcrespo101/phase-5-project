@@ -88,7 +88,7 @@ const [errors, setErrors]= useState('')
       //     }
       //   });
       // };
-
+      console.log(userType)
       const handleSubmit = (event) => {
         event.preventDefault();
         fetch(userType === "Admin" ? `/login` : `/patient/login`, {
@@ -98,17 +98,24 @@ const [errors, setErrors]= useState('')
           },
           body: JSON.stringify(formData),
         }).then((res) => {
-          res.json().then((user) => {
-            
-            if (user?.first_name) {
+          res.json().then((user) => {   
+            if (1 < user?.email?.length) {
+                console.log(user)
                 setCurrentUser(user);
                 setIsAuthenticated(true)
+                setUserType('Patient')
                 navigate('/')
             } else {
+                  console.log(user)
                   setErrors("Invalid Username or Password");
                   setCurrentUser(null);
                   setIsAuthenticated(false)
+                  setUserType('Patient')
                   navigate('/login')
+                  setFormData({
+                    email: '',
+                    password: ''
+                  })
                 }
             })
       });
@@ -117,7 +124,9 @@ const [errors, setErrors]= useState('')
       function handleUser(e){
         setUserType(e.target.value)
       }
-      console.log(errors)
+
+      console.log(currentUser)
+      
     return(
       <>
           <img src={logo} alt="login-logo" className='login-logo'/>
