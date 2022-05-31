@@ -186,13 +186,13 @@ function handleEditSubmit(e){
   
   const patientName = patients.find((patient) => patient.id == selectPatient)
 
-  const byMonth = appointments.filter((appointment) => appointment.startDate.includes(filterMonth))
+  const byMonth = appointments.filter((appointment) => appointment.startDate?.includes(filterMonth))
 
   console.log(byMonth)
     return(
       <div className="appointments">
-        <h1 id="appointment title">Upcoming Appointments:</h1>
-        <label>
+        <h1 id="appointment title" style={{color: "white"}}>Upcoming Appointments:</h1>
+        <label style={{color: "white"}}>
           Filter Appointments By Month:  
           <select onChange={handleMonth}>
             <option name="All">All</option>
