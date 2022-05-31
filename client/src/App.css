@@ -423,9 +423,10 @@ details {
 }
 
 .services {
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
     height: 90%;
+    margin-left: -10px;
     
 }
 
@@ -443,16 +444,15 @@ details {
 
 .anxiety-info {
     height: fit-content;
-    width: 50%;
+    width: 30%;
     left: 40%;
     top: 35%;
-    background: white;
     padding: 5px;
     border-radius: 10px;
-    border: solid 2px gray;
-    box-shadow: 10px 5px 15px;
     padding: 20px;
     margin: 0 auto;
+    color: white;
+    display: table-caption;
 }
 
 
@@ -630,4 +630,9 @@ cursor: pointer;
     border: none;
     background: rgb(230, 89, 73);
     color: white;
+}
+
+.first {
+    height: fit-content;
+    display: flex;
 }
