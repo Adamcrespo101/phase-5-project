@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 function Signup(){
     let navigate = useNavigate()
+    const [errors, setErrors] = useState('')
     const [formData, setFormData] = useState({
         email: '',
         first_name: '',
@@ -36,21 +37,21 @@ function Signup(){
           body: JSON.stringify(userCreds),
         }).then((res) => {
           if (res.ok) {
-            res.json().then((user) => {
+          res.json().then((user) => {
               console.log(user)
              // setCurrentUser(user);
               navigate('/login')
             });
           } else {
             res.json().then((errors) => {
-              console.error(errors);
+              setErrors(errors)
+              alert(errors.exception)
             });
           }
         });
       }
 
-      
-
+      console.log(errors)
 
 
     return(
@@ -98,7 +99,7 @@ function Signup(){
                 <label className="login-inputs">
                 Describe yourself:
                 <br></br> 
-                <textarea className="login-inputs bio-box" type="text" name="bio" onChange={handleSignUp} value={formData.bio} placeholder="Describe yourself and what type of services you may need in atleast 300 characters to assist us in providing the best care possible." required/>
+                <textarea className="login-inputs bio-box" type="text" name="bio" onChange={handleSignUp} value={formData.bio} placeholder="Describe yourself and what type of services you may need in atleast 100 characters to assist us in providing the best care possible." required/>
                 </label>
                 <br></br>
                 <a href={intake} download className="login-inputs">**First time patients must fill out this form and bring it with them to their first appointment!**</a>
