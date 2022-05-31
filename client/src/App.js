@@ -94,7 +94,7 @@ return (
     <Header isAuthenticated={isAuthenticated} setCurrentUser={setCurrentUser} setIsAuthenticated={setIsAuthenticated} userType={userType} currentUser={currentUser}/>
     <Routes>
       <Route index element={<Home currentUser={currentUser}/>} path="/"/>
-      <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} setCurrentUser={setCurrentUser} userType={userType} setUserType={setUserType}/>} />
+      <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} setCurrentUser={setCurrentUser} userType={userType} setUserType={setUserType} currentUser={currentUser}/>} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/services" element={<Services />} />
       <Route path="/appointments" element={<Schedule setEditState={setEditState} editState={editState} changeEditState={changeEditState} patients={patients} admin={admin} appointments={appointments} setAppointments={setAppointments} currentUser={currentUser}/>} />

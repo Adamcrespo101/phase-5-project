@@ -1,7 +1,7 @@
 class AppointmentsController < ApplicationController
     before_action :find_patient
     def index 
-        render json: Appointment.all, status: :ok
+        render json: Appointment.all.order(:startDate), status: :ok
     end
 
     def create 

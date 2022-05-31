@@ -103,7 +103,8 @@ function Signup(){
                 <br></br>
                 <a href={intake} download className="login-inputs">**First time patients must fill out this form and bring it with them to their first appointment!**</a>
                 <br></br>
-                <button type="submit" className="login-inputs">Register</button>
+                <button type="submit" style={{marginBottom: '10px'}} className="login-inputs">Register</button>
+                
                 </form>
         </div>
     )

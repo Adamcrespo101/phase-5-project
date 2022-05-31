@@ -52,7 +52,7 @@ function MyAppointments({currentUser, appointments, setAppointments}){
 
     return(
         <div className="my-appointments">
-            <h1>My Appointments:</h1>
+            <h1 style={{color: "white"}}>My Appointments:</h1>
             { currentUser?.appointments?.length < 1 ? 
             
             

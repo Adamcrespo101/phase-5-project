@@ -23,7 +23,7 @@
     width: 20%;
     background-color: white;
     position: absolute;
-    margin: 10% 40% 0 40%;
+    margin: 10% 40% 0 41%;
     border: solid 2px gray;
     border-radius: 10px;
     padding: 5px;
@@ -45,11 +45,12 @@
     width: fit-content;
     background-color: white;
     position: absolute;
-    right: 37%; 
+    right: 29%; 
     top: 20%;
     margin: 0 auto;
     border: solid 2px gray;
     border-radius: 10px;
+    padding: 5px;
 }
 
 .signup-title {
@@ -413,7 +414,7 @@ details {
     height: 200px;
     width: 200px;
     position: relative;
-    right: -41%;
+    right: -43.5%;
     top: 10%;
     z-index: -1;
     border-radius: 50px;
@@ -431,7 +432,6 @@ details {
 .services-1 {
     height: 300px;
     width: 400px;
-    position: absolute;
     left: 10%;
     top: 35%;
     border-radius: 10px;
@@ -442,9 +442,8 @@ details {
 
 
 .anxiety-info {
-    height: 36%;
-    width: 30rem;
-    position: absolute;
+    height: fit-content;
+    width: 50%;
     left: 40%;
     top: 35%;
     background: white;
@@ -452,21 +451,19 @@ details {
     border-radius: 10px;
     border: solid 2px gray;
     box-shadow: 10px 5px 15px;
-    transition: 200ms ease-in-out;
     padding: 20px;
-    display: grid;
+    margin: 0 auto;
 }
 
 
-
-.anxiety-info:hover, .services-1:hover, .services-2:hover, .depression-info:hover, .services-3:hover, .services-4:hover, .child-care-info:hover, .surgical-info:hover{
+ .services-1:hover, .services-2:hover, .depression-info:hover, .services-3:hover, .services-4:hover, .child-care-info:hover, .surgical-info:hover{
     transform: scale(1.1);
 }
 
 .services-2 {
     height: 300px;
     width: 400px;
-    position: absolute;
+
     left: 10%;
     top: 80.5%;
     border-radius: 10px;
@@ -475,9 +472,8 @@ details {
 }
 
 .depression-info {
-    height: 36%;
+    height: fit-content;
     width: 30rem;
-    position: absolute;
     left: 40%;
     top: 80%;
     background: white;
@@ -487,14 +483,12 @@ details {
     box-shadow: 10px 5px 15px;
     transition: 200ms ease-in-out;
     padding: 20px;
-    display: grid;
 }
 
 
 .services-3 {
     height: 300px;
     width: 400px;
-    position: absolute;
     left: 10%;
     bottom: -68%;
     border-radius: 10px;
@@ -507,7 +501,6 @@ details {
 .services-4 {
     height: 300px;
     width: 400px;
-    position: absolute;
     left: 10%;
     bottom: -113%;
     border-radius: 10px;
@@ -516,11 +509,8 @@ details {
 }
 
 .child-care-info {
-    height: 36%;
+    height: fit-content;
     width: 30rem;
-    position: absolute;
-    left: 40%;
-    bottom: -68%;
     background: white;
     padding: 5px;
     border-radius: 10px;
@@ -528,15 +518,11 @@ details {
     box-shadow: 10px 5px 15px;
     transition: 200ms ease-in-out;
     padding: 20px;
-    display: grid;
 }
 
 .surgical-info {
-    height: 36%;
+    height: fit-content;
     width: 30rem;
-    position: absolute;
-    left: 40%;
-    bottom: -113%;
     background: white;
     padding: 5px;
     border-radius: 10px;
@@ -544,7 +530,6 @@ details {
     box-shadow: 10px 5px 15px;
     transition: 200ms ease-in-out;
     padding: 20px;
-    display: grid;
 }
 
 .login-logo{
@@ -552,9 +537,10 @@ details {
     height: 300px;
     width: 300px;
     position: relative;
-    right: -37%;
+    right: -39%;
     top: 10%;
     z-index: -1;
+    margin: 0 auto;
 }
 
 .book-btn {
@@ -578,16 +564,16 @@ details {
 }
 
 .footer{
-    height: 20px;
-    position: fixed;
-    bottom: 0%;
-    background: red;
+    height: fit-content;
+    margin: 200px auto;
+    background: rgba(84, 158, 133, 0.97);
     width: 100%;
     color: white;
     text-align: center;
     padding: 10px;
     margin-left: -20px;
     padding-bottom: 20px;
+
 }
 
 .chat-box{

@@ -2,7 +2,7 @@ import { useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import logo from '../images/Healwell-logos.jpeg'
 
-function Login({setIsAuthenticated, setCurrentUser, userType, setUserType}){
+function Login({setIsAuthenticated, setCurrentUser, userType, setUserType, currentUser}){
     let navigate = useNavigate()
 const [errors, setErrors]= useState('')
     // useEffect(() => {
@@ -61,6 +61,34 @@ const [errors, setErrors]= useState('')
         });
       };
 
+      // const handleSubmit = (event) => {
+      //   event.preventDefault();
+      //   fetch(userType === "Admin" ? `/login` : `/patient/login`, {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(formData),
+      //   }).then((res) => {
+      //     if (currentUser?.first_name.length > 1) {
+      //       res.json().then((user) => {
+            
+      //           setCurrentUser(user);
+      //           setIsAuthenticated(true)
+      //           navigate('/')
+      //       })
+      //     } else {
+      //       res.json().then((errors) => {
+      //         console.log("errors here")
+      //         setErrors(errors);
+      //         setCurrentUser(null);
+      //         setIsAuthenticated(false)
+      //         navigate('/login')
+      //       });
+      //     }
+      //   });
+      // };
+
       const handleSubmit = (event) => {
         event.preventDefault();
         fetch(userType === "Admin" ? `/login` : `/patient/login`, {
@@ -70,24 +98,21 @@ const [errors, setErrors]= useState('')
           },
           body: JSON.stringify(formData),
         }).then((res) => {
-          if (res.ok) {
-            res.json().then((user) => {
+          res.json().then((user) => {
             
+            if (user?.first_name) {
                 setCurrentUser(user);
                 setIsAuthenticated(true)
                 navigate('/')
+            } else {
+                  setErrors("Invalid Username or Password");
+                  setCurrentUser(null);
+                  setIsAuthenticated(false)
+                  navigate('/login')
+                }
             })
-          } else {
-            res.json().then((errors) => {
-              console.log("errors here")
-              setErrors(errors);
-              setCurrentUser(null);
-              setIsAuthenticated(false)
-              navigate('/login')
-            });
-          }
-        });
-      };
+      });
+};
     
       function handleUser(e){
         setUserType(e.target.value)
@@ -122,7 +147,7 @@ const [errors, setErrors]= useState('')
                 <a className='login-inputs' href='/signup'>Need an account? Click here to register.</a>
                 <br></br>
                 <button type="submit" className="login-inputs">Log in </button>
-                <p className='errors'>{errors !== '' ? `${errors?.error?.login}` : null}</p>
+                <p className='errors'>{errors !== '' ? `${errors}` : null}</p>
             </form>
         </div>
         </>
