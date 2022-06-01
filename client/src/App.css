@@ -45,12 +45,12 @@
     width: fit-content;
     background-color: white;
     position: absolute;
-    right: 29%; 
-    top: 20%;
+    right: 27%; 
+    top: 30%;
     margin: 0 auto;
     border: solid 2px gray;
     border-radius: 10px;
-    padding: 5px;
+    padding: 15px;
 }
 
 .signup-title {
@@ -423,12 +423,13 @@ details {
 }
 
 .services {
-    width: 100%;
+    width: 65%;
     margin: 0 auto;
-    height: 90%;
-    margin-left: -10px;
-    
+    background: white;
+    border: solid 2px gray;
+    border-radius: 10px;   
 }
+
 
 .services-1 {
     height: 300px;
@@ -444,26 +445,25 @@ details {
 
 .anxiety-info {
     height: fit-content;
-    width: 30%;
+    width: 20%;
     left: 40%;
     top: 35%;
     padding: 5px;
     border-radius: 10px;
     padding: 20px;
-    margin: 0 auto;
-    color: white;
+    margin: 0 5% 0 auto;
+    color: black;
     display: table-caption;
 }
 
 
- .services-1:hover, .services-2:hover, .depression-info:hover, .services-3:hover, .services-4:hover, .child-care-info:hover, .surgical-info:hover{
+ .services-1:hover, .services-2:hover, .services-3:hover, .services-4:hover, .child-care-info:hover, .surgical-info:hover{
     transform: scale(1.1);
 }
 
 .services-2 {
     height: 300px;
     width: 400px;
-
     left: 10%;
     top: 80.5%;
     border-radius: 10px;
@@ -473,16 +473,15 @@ details {
 
 .depression-info {
     height: fit-content;
-    width: 30rem;
+    width: 20%;
     left: 40%;
-    top: 80%;
-    background: white;
+    top: 35%;
     padding: 5px;
     border-radius: 10px;
-    border: solid 2px gray;
-    box-shadow: 10px 5px 15px;
-    transition: 200ms ease-in-out;
     padding: 20px;
+    margin: 0 auto 0 5%;
+    color: black;
+    display: table-caption;
 }
 
 
@@ -565,7 +564,7 @@ details {
 
 .footer{
     height: fit-content;
-    margin: 200px auto;
+    margin: 150px auto;
     background: rgba(84, 158, 133, 0.97);
     width: 100%;
     color: white;
@@ -635,4 +634,45 @@ cursor: pointer;
 .first {
     height: fit-content;
     display: flex;
+    margin-top: 50px;
+}
+
+.sliding-message {
+    height: fit-content;
+    width: 400px;
+    margin-top: 12.5%;
+    float: left;
+    margin-left: 1%;
+    border-radius: 10px;
+    display: block;
+    padding: 5px;
+    color: white;
+}
+
+.sliding-message > img {
+    margin-left: 45px;
+    padding-top: 10px;
+    border-radius: 20%;
+}
+
+@keyframes slidein {
+    from {
+        margin-left: -30%;
+    }
+    to {
+        margin-left: 1%;
+    }
+}
+
+.services-title{
+    text-align: center;
+    height: 200px;
+    width: 200px;
+    position: relative;
+    right: -43.5%;
+    top: 10%;
+    z-index: -1;
+    border-radius: 50px;
+    margin-top: 25px;
+    margin-bottom: 10px;
 }

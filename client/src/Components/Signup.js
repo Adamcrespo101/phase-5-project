@@ -1,6 +1,9 @@
+import smiling from '../images/smiling.jpg'
 import intake from '../Intakeform.pdf'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import logo from '../images/Healwell-logos.jpeg'
+import building from '../images/clinic.jpg'
 
 function Signup(){
     let navigate = useNavigate()
@@ -51,10 +54,18 @@ function Signup(){
         });
       }
 
-      console.log(errors)
-
-
     return(
+      <>
+      <img src={logo} alt="login-logo" className='services-title'/>
+      {/*<div className='sliding-message'>
+        <img src={smiling} alt="happy-person-smiling" style={{height: '200px', width: "300px"}}/>
+        <br></br>
+        <h4>We have a unique approach, and we're confident you will see progress soon. The first step is to schedule an appointment online or calling.</h4> 
+        <br></br>
+        <img src={building} alt="happy-person-smiling" style={{height: '200px', width: "300px"}}/>
+        <br></br>
+        <h4>With caring, knowledgeable staff and the most current treatments, our office is equipped to care for mood and anxiety disorder patients with a variety of symptoms and needs.</h4> 
+    </div>*/}
         <div className="signup">
             <h3 className='signup-title'>Register a new patient:</h3>
                 <form onSubmit={handleSubmit}>
@@ -99,7 +110,7 @@ function Signup(){
                 <label className="login-inputs">
                 Describe yourself:
                 <br></br> 
-                <textarea className="login-inputs bio-box" type="text" name="bio" onChange={handleSignUp} value={formData.bio} placeholder="Describe yourself and what type of services you may need in atleast 100 characters to assist us in providing the best care possible." required/>
+                <textarea className="login-inputs bio-box" type="text" name="bio" onChange={handleSignUp} value={formData.bio} placeholder="Describe yourself and what type of services you may need in as much detail as you can in order to assist us in providing the best care possible." required/>
                 </label>
                 <br></br>
                 <a href={intake} download className="login-inputs">**First time patients must fill out this form and bring it with them to their first appointment!**</a>
@@ -108,6 +119,7 @@ function Signup(){
                 
                 </form>
         </div>
+      </>
     )
 }
 

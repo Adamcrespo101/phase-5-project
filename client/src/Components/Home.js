@@ -6,7 +6,7 @@ import home5 from '../images/home5.jpg'
 import home6 from '../images/home6.jpg'
 import logo from '../images/Healwell-logos.jpeg'
 import { useEffect } from 'react'
-
+import Footer from './Footer'
 
 function Home({currentUser}){
 
@@ -45,7 +45,7 @@ function Home({currentUser}){
                     </div>
                     
                 </div>
-                
+                <Footer />
         </div>
     )
 }

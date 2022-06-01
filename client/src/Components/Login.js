@@ -1,6 +1,7 @@
 import { useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import logo from '../images/Healwell-logos.jpeg'
+import Footer from './Footer'
 
 function Login({setIsAuthenticated, setCurrentUser, userType, setUserType, currentUser}){
     let navigate = useNavigate()
@@ -159,6 +160,7 @@ const [errors, setErrors]= useState('')
                 <p className='errors'>{errors !== '' ? `${errors}` : null}</p>
             </form>
         </div>
+            <Footer />
         </>
     )
 }

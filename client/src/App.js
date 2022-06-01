@@ -14,6 +14,7 @@ import Casefiles from './Components/Casefiles';
 import MyAppointments from './Components/MyAppointments';
 import Footer from './Components/Footer';
 
+
 function App() {
 
 const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -103,7 +104,6 @@ return (
       <Route path="/casefiles" element={<Casefiles admin={admin} patients={patients} setPatients={setPatients} casefiles={casefiles} setCasefiles={setCasefiles}/>} />
       <Route path="/my_appointments" element={<MyAppointments currentUser={currentUser} appointments={appointments} setAppointments={setAppointments}/>} />
     </Routes>
-    <Footer />
   </BrowserRouter>
 
     </div>

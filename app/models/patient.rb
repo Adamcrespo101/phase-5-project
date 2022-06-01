@@ -11,8 +11,8 @@ class Patient < ApplicationRecord
     validates :date_of_birth, presence: true
     validates :password_digest, presence: true
     validates :email, uniqueness: true
-    validates :bio, length: {minimum: 100, 
-        too_short: "100 characters is the minimum required length for a patient bio"}
+    #validates :bio, length: {minimum: 100, 
+     #   too_short: "100 characters is the minimum required length for a patient bio"}
     validates_each :date_of_birth do |record, attr, value|
             begin
               Date.parse(value)
