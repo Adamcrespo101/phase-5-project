@@ -162,7 +162,7 @@ function Casefiles({patients, setPatients, casefiles, setCasefiles}){
                                 </div>
                                     <br></br>          
                                 <details>                      
-                                <summary className='report-summary'><h3>Progress Reports</h3></summary>
+                                <summary className='report-summary'><h3>Patient notes</h3></summary>
                                 { patient.casefiles.length < 1 ?  
                                 
                                 

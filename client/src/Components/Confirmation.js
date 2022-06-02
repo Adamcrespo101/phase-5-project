@@ -17,7 +17,7 @@ let nav = useNavigate()
     return(
         <div className="confirmation" style={{color: 'white'}}>
             <h1>Thank you for booking an appointment with us, you will receive an email confirmation shortly!</h1>
-            <h2>Your being redirected to homepage...</h2>
+            <h2>Your being redirected to your appointments...</h2>
         </div>
     )
 }

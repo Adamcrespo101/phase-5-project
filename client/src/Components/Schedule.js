@@ -140,8 +140,9 @@ function handleEditSubmit(e){
   }
   
   const filterByMonth = admin?.appointments?.filter((appointment) => appointment.startDate.includes(filterMonth))
-
- 
+  
+  
+  const byMonth = appointments.filter((appointment) => appointment.startDate?.includes(filterMonth))
 
   const adminApptSubmit = (e) => {
     e.preventDefault()
@@ -164,8 +165,9 @@ function handleEditSubmit(e){
       body: JSON.stringify(newAppointment)
     })
     .then(res => res.json())
-    .then(data => setAppointments([...appointments, data]))
+    .then(data => setAppointments([...byMonth, newAppointment]))
     //nav('/confirmation')
+    console.log(newAppointment)
     setAdminAppt({
       admin_id: '',
       patient_id: '',
@@ -186,9 +188,8 @@ function handleEditSubmit(e){
   
   const patientName = patients.find((patient) => patient.id == selectPatient)
 
-  const byMonth = appointments.filter((appointment) => appointment.startDate?.includes(filterMonth))
 
-  console.log(byMonth)
+  console.log(patientName?.full_name)
     return(
       <div className="appointments">
         <h1 id="appointment title" style={{color: "white"}}>Upcoming Appointments:</h1>
@@ -213,7 +214,7 @@ function handleEditSubmit(e){
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
-               <Typography>Appointment for: {appointment.patient.full_name} - {appointment.startDate}</Typography>
+               <Typography>Appointment for: {appointment?.startDate} - {appointment?.time}</Typography>
               </AccordionSummary>
                 {editState ? 
                 <>
